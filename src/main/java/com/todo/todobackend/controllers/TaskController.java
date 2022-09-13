@@ -1,34 +1,46 @@
 package com.todo.todobackend.controllers;
 
 import com.todo.todobackend.models.Task;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/tasks")
 @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000"})
 public class TaskController {
+    int currentId = 1;
+
+    Map<String, Task> tasks = new HashMap<>();
+
     /*@Autowired
     private WineService wineService;*/
 
-    /*@PostMapping("/add")
-    public boolean addWine(@RequestBody Wine wine) {
+    @PostMapping("/add")
+    public boolean add(@RequestBody Task task) {
         try {
-            wineService.addWine(wine);
+            task.setId(currentId);
+            tasks.put(String.valueOf(currentId), task);
+            currentId++;
         } catch (Exception e) {
             return false;
         }
         return true;
-    }*/
+    }
 
     @GetMapping("/all")
     public List<Task> getAllTasks() {
-        return Arrays.asList(
+        List<Task> taskList = new ArrayList<>();
+
+        for(Map.Entry<String, Task> task : tasks.entrySet()) {
+            taskList.add(task.getValue());
+        }
+
+        return taskList;
+        /*return Arrays.asList(
                 Task.builder()
                         .id(1)
                         .description("Java SE 11 Developer Certification (1Z0-819)")
@@ -41,7 +53,7 @@ public class TaskController {
                         .id(3)
                         .description("AWS Certified Developer - Associate")
                         .build()
-        );
+        );*/
     }
 
     /*@GetMapping("/{id}")
