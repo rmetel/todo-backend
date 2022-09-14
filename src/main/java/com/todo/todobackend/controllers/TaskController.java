@@ -1,7 +1,6 @@
 package com.todo.todobackend.controllers;
 
 import com.todo.todobackend.models.Task;
-//import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ public class TaskController {
     private WineService wineService;*/
 
     @PostMapping("/tasks/add")
-//    @ApiOperation(value = "adds a new task", httpMethod = "POST")
     public boolean addTask(@RequestBody Task task) {
         try {
             task.setId(currentId);
@@ -34,7 +32,6 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-//    @ApiOperation(value = "retrieves all available tasks", httpMethod = "GET")
     public List<Task> getAllTasks() {
         List<Task> taskList = new ArrayList<>();
 
