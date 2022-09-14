@@ -1,6 +1,7 @@
 package com.todo.todobackend.controllers;
 
 import com.todo.todobackend.models.Task;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,19 +20,8 @@ public class TaskController {
     /*@Autowired
     private WineService wineService;*/
 
-    @PostMapping("/tasks/add")
-    public boolean addTask(@RequestBody Task task) {
-        try {
-            task.setId(currentId);
-            tasks.put(String.valueOf(currentId), task);
-            currentId++;
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
     @GetMapping("/tasks")
+    @Operation(description = "retrieves all tasks")
     public List<Task> getAllTasks() {
         List<Task> taskList = new ArrayList<>();
 
@@ -54,6 +44,19 @@ public class TaskController {
                         .description("AWS Certified Developer - Associate")
                         .build()
         );*/
+    }
+
+    @PostMapping("/tasks/add")
+    @Operation(description = "Adds a new task")
+    public Task addTask(@RequestBody Task task) {
+        try {
+            task.setId(currentId);
+            tasks.put(String.valueOf(currentId), task);
+            currentId++;
+        } catch (Exception e) {
+            return null;
+        }
+        return task;
     }
 
     /*@GetMapping("/{id}")
