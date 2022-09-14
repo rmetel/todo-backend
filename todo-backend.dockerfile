@@ -17,3 +17,6 @@ EXPOSE 8080
 
 # java -jar /opt/app/app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
+
+# terminal
+# docker run --name todo-backend -dp 8080:8080 todo-backend
