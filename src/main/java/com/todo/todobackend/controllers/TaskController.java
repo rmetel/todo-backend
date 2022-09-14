@@ -20,7 +20,7 @@ public class TaskController {
     private WineService wineService;*/
 
     @PostMapping("/tasks/add")
-    public boolean add(@RequestBody Task task) {
+    public boolean addTask(@RequestBody Task task) {
         try {
             task.setId(currentId);
             tasks.put(String.valueOf(currentId), task);
