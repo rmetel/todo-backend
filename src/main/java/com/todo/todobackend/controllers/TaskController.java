@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api")
 @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000"})
 public class TaskController {
     int currentId = 1;
@@ -19,7 +19,7 @@ public class TaskController {
     /*@Autowired
     private WineService wineService;*/
 
-    @PostMapping("/add")
+    @PostMapping("/tasks/add")
     public boolean add(@RequestBody Task task) {
         try {
             task.setId(currentId);
@@ -31,7 +31,7 @@ public class TaskController {
         return true;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/tasks")
     public List<Task> getAllTasks() {
         List<Task> taskList = new ArrayList<>();
 
