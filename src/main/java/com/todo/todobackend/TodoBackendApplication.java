@@ -1,27 +1,30 @@
 package com.todo.todobackend;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.Collections;
-
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-@EnableSwagger2
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@OpenAPIDefinition(info = @Info(
+		title = "ToDo Api",
+		version = "1.0",
+		description = "API for task administration",
+		contact = @Contact(
+			name = "Ralph Metel",
+			email = "ralph.metel@exxeta.com"
+		)
+	)
+)
 public class TodoBackendApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TodoBackendApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TodoBackendApplication.class, args);
+    }
 
-	@Bean
+	/*@Bean
 	public Docket swaggerConfig(){
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
@@ -37,6 +40,6 @@ public class TodoBackendApplication {
 						"free to use",
 						Collections.emptyList()
 				));
-	}
+	}*/
 
 }
