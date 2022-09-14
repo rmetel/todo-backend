@@ -21,7 +21,7 @@ public class TaskController {
     private WineService wineService;*/
 
     @GetMapping("/tasks")
-    @Operation(description = "retrieves all tasks")
+    @Operation(description = "Gets all tasks")
     public List<Task> getAllTasks() {
         List<Task> taskList = new ArrayList<>();
 
@@ -30,20 +30,6 @@ public class TaskController {
         }
 
         return taskList;
-        /*return Arrays.asList(
-                Task.builder()
-                        .id(1)
-                        .description("Java SE 11 Developer Certification (1Z0-819)")
-                        .build(),
-                Task.builder()
-                        .id(2)
-                        .description("Certified Kubernetes Application Developer (CKAD)")
-                        .build(),
-                Task.builder()
-                        .id(3)
-                        .description("AWS Certified Developer - Associate")
-                        .build()
-        );*/
     }
 
     @PostMapping("/tasks/add")
