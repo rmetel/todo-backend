@@ -1,10 +1,11 @@
 package com.todo.todobackend.controllers;
 
 import com.todo.todobackend.models.Task;
+import com.todo.todobackend.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,28 +18,20 @@ public class TaskController {
 
     Map<String, Task> tasks = new HashMap<>();
 
-    /*@Autowired
-    private WineService wineService;*/
+    @Autowired
+    private TaskService taskService;
 
     @GetMapping("/tasks")
     @Operation(description = "Gets all tasks")
     public List<Task> getAllTasks() {
-        List<Task> taskList = new ArrayList<>();
-
-        for(Map.Entry<String, Task> task : tasks.entrySet()) {
-            taskList.add(task.getValue());
-        }
-
-        return taskList;
+        return taskService.getAllTasks();
     }
 
     @PostMapping("/tasks/add")
     @Operation(description = "Adds a new task")
     public Task addTask(@RequestBody Task task) {
         try {
-            task.setId(currentId);
-            tasks.put(String.valueOf(currentId), task);
-            currentId++;
+            taskService.addTask(task);
         } catch (Exception e) {
             return null;
         }

@@ -1,11 +1,19 @@
 package com.todo.todobackend.models;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Builder
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 @Data
+@NoArgsConstructor
 public class Task {
-    int id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id;
+
     String description;
 }
