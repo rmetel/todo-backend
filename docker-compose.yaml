@@ -39,6 +39,7 @@ services:
       - "C:/Users/rame/db:/var/lib/mysql:rw"
     networks:
       - isolated
+
 networks:
   isolated: {}
 
