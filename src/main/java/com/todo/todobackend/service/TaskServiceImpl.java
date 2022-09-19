@@ -19,6 +19,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public boolean deleteTask(Task task) {
+        try {
+            taskRepository.delete(task);
+            return true;
+        } catch (Exception e) {
+
+        }
+
+        return false;
+    }
+
+    @Override
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
