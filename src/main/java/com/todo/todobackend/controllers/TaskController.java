@@ -4,14 +4,10 @@ import com.todo.todobackend.models.Api;
 import com.todo.todobackend.models.Task;
 import com.todo.todobackend.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,13 +18,14 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    BuildProperties buildProperties;
+
     @GetMapping("/version")
     @Operation(description = "Gets api version")
-    private Api getVersion() throws IOException, XmlPullParserException {
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        Model model = reader.read(new FileReader("pom.xml"));
+    public Api getVersion() {
         return Api.builder()
-                .version(model.getVersion())
+                .version(buildProperties.getVersion())
                 .build();
     }
 
@@ -61,8 +58,8 @@ public class TaskController {
         return true;
     }
 
-    @GetMapping("/{id}")
-    public Optional<Task> getTaskById(@PathVariable String id){
+    @GetMapping("/tasks/{id}")
+    public Optional<Task> getTaskById(@PathVariable String id) {
         return taskService.findById(Integer.parseInt(id));
     }
 }

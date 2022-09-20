@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.todo</groupId>
 	<artifactId>todo-backend</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.5-SNAPSHOT</version>
 	<name>todo-backend</name>
 	<description>todo-backend</description>
 	<properties>
@@ -66,6 +66,14 @@
 						</exclude>
 					</excludes>
 				</configuration>
+				<executions>
+					<execution>
+						<id>build-info</id>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
