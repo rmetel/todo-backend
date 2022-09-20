@@ -1,11 +1,17 @@
 package com.todo.todobackend.controllers;
 
+import com.todo.todobackend.models.Api;
 import com.todo.todobackend.models.Task;
 import com.todo.todobackend.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +21,16 @@ import java.util.Optional;
 public class TaskController {
     @Autowired
     private TaskService taskService;
+
+    @GetMapping("/version")
+    @Operation(description = "Gets api version")
+    private Api getVersion() throws IOException, XmlPullParserException {
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        Model model = reader.read(new FileReader("pom.xml"));
+        return Api.builder()
+                .version(model.getVersion())
+                .build();
+    }
 
     @GetMapping("/tasks")
     @Operation(description = "Gets all tasks")

@@ -5,7 +5,7 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 
 # Refer to Maven build -> finalName
-ARG JAR_FILE=target/todo-backend-*-SNAPSHOT.jar
+#ARG JAR_FILE=target/todo-backend-1.0.3-SNAPSHOT.jar
 
 # cd /opt/app
 WORKDIR /opt/app
@@ -17,6 +17,15 @@ EXPOSE 8080
 
 # java -jar /opt/app/app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
+
+# ------
+#FROM maven:3.8.2-jdk-8
+#
+#WORKDIR /todo-backend
+#COPY . .
+#RUN mvn clean install
+#EXPOSE 8080
+#CMD mvn spring-boot:run
 
 # terminal
 # docker build -t todo-backend -f todo-backend.dockerfile .

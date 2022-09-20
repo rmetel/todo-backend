@@ -27,9 +27,7 @@ services:
 
   todo-database:
     container_name: todo-database
-    image: mysql:8.0.17
-    #build:
-    #  dockerfile: todo-database.dockerfile
+    image: mysql:8.0.30
     environment:
       MYSQL_ROOT_PASSWORD: todo
       MYSQL_DATABASE: todo
