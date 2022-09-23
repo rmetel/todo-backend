@@ -2,6 +2,26 @@ version: '3'
 
 services:
 
+  todo-nginx:
+    container_name: todo-nginx
+    build:
+      dockerfile: todo-nginx.dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - todo-backend
+      - todo-frontend
+    networks:
+      - isolated
+
+  todo-frontend:
+    container_name: todo-frontend
+    image: rmetel/todo-frontend:1.0
+    ports:
+      - "3000:3000"
+    networks:
+      - isolated
+
   todo-backend:
     container_name: todo-backend
     build:
