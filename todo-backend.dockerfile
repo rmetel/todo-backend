@@ -27,3 +27,8 @@ ENTRYPOINT ["java","-jar","app.jar"]
 # terminal
 # docker build -t todo-backend -f todo-backend.dockerfile .
 # docker run --name todo-backend -dp 8080:8080 todo-backend
+
+# docker hub
+# docker build -t rmetel/todo-backend:1.0 -f todo-backend.dockerfile .
+# docker run --name todo-backend -dp 8080:8080 rmetel/todo-backend:1.0
+# docker push rmetel/todo-backend:1.0
