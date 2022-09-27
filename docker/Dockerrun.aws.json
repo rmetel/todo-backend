@@ -1,0 +1,34 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "todo-nginx",
+      "image": "rmetel/nginx:1.0",
+      "portMappings": {
+        "hostPort": 80,
+        "containerPort": 80
+      },
+      "essential": true,
+      "links": ["todo-frontend", "todo-backend"],
+      "memory": 100
+    },
+    {
+      "name": "todo-frontend",
+      "image": "rmetel/todo-frontend:1.1",
+      "portMappings": {
+        "hostPort": 3000,
+        "containerPort": 3000
+      },
+      "memory": 300
+    },
+    {
+      "name": "todo-backend",
+      "image": "rmetel/todo-backend:1.1",
+      "portMappings": {
+        "hostPort": 8080,
+        "containerPort": 8080
+      },
+      "memory": 300
+    }
+  ]
+}
