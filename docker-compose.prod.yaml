@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  todo-nginx:
+    container_name: todo-nginx
+    build:
+      dockerfile: todo-nginx.dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - todo-backend
+      - todo-frontend
+    networks:
+      - isolated
+
+  todo-frontend:
+    container_name: todo-frontend
+    image: rmetel/todo-frontend:1.1
+    ports:
+      - "3000:3000"
+    networks:
+      - isolated
+
+  todo-backend:
+    container_name: todo-backend
+    image: rmetel/todo-backend:1.1
+    ports:
+      - "8080:8080"
+    networks:
+      - isolated
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url": "jdbc:mysql://todo.c9dqwrxvc0jg.eu-central-1.rds.amazonaws.com:3306/todo?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true",
+        "spring.datasource.username": "root",
+        "spring.datasource.password": "J~Q2xXBRGpmU)C!1oJbn",
+        "spring.datasource.driver-class-name": "com.mysql.cj.jdbc.Driver",
+        "spring.datasource.initialization-mode": "always",
+        "spring.jpa.show-sql": "true",
+        "spring.jpa.hibernate.ddl-auto": "update",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"
+      }'
+
+networks:
+  isolated: {}
