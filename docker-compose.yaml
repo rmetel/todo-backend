@@ -16,7 +16,7 @@ services:
 
   todo-frontend:
     container_name: todo-frontend
-    image: rmetel/todo-frontend:1.0
+    image: rmetel/todo-frontend:1.1
     ports:
       - "3000:3000"
     networks:
@@ -24,8 +24,7 @@ services:
 
   todo-backend:
     container_name: todo-backend
-    build:
-      dockerfile: todo-backend.dockerfile
+    image: rmetel/todo-backend:1.1
     ports:
       - "8080:8080"
     depends_on:
@@ -41,7 +40,6 @@ services:
         "spring.datasource.initialization-mode": "always",
         "spring.jpa.show-sql": "true",
         "spring.jpa.hibernate.ddl-auto": "update",
-        "hibernate.hbm2ddl.auto": "create",
         "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"
       }'
 
