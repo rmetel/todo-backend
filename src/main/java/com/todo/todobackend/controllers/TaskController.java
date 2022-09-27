@@ -35,7 +35,7 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 
-    @PostMapping("/tasks/add")
+    @PostMapping("/tasks")
     @Operation(description = "Adds a new task")
     public Task addTask(@RequestBody Task task) {
         try {
