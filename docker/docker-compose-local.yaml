@@ -2,11 +2,15 @@ version: '3'
 
 services:
 
+  local-frontend:
+    container_name: local-frontend
+    image: rmetel/todo-frontend:1.1
+    ports:
+      - "3000:3000"
+
   local-db:
-    container_name: local-db
+    container_name: local-database
     image: mysql:8.0.30
-    #build:
-    #  dockerfile: todo-database.dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: todo
       MYSQL_DATABASE: todo

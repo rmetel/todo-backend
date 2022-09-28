@@ -60,4 +60,4 @@ networks:
   isolated: {}
 
 volumes:
-  todo-db : {}
+  todo-database : {}
