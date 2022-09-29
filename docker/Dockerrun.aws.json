@@ -3,9 +3,9 @@
   "containerDefinitions": [
     {
       "name": "todo-nginx",
-      "image": "rmetel/todo-nginx:1.0",
+      "image": "rmetel/todo-nginx:1.2",
       "hostname": "todo-nginx",
-      "links": ["todo-backend", "todo-frontend"],
+      "links": ["todo-frontend", "todo-backend"],
       "portMappings": [
         {
           "hostPort": 80,
@@ -17,11 +17,11 @@
         }
       ],
       "essential": true,
-      "memory": 256
+      "memory": 1024
     },
     {
       "name": "todo-frontend",
-      "image": "rmetel/todo-frontend:1.2",
+      "image": "rmetel/todo-frontend:1.6",
       "hostname": "todo-frontend",
       "portMappings": [
         {
@@ -33,50 +33,15 @@
     },
     {
       "name": "todo-backend",
-      "image": "rmetel/todo-backend:1.8",
+      "image": "rmetel/todo-backend:1.12",
       "hostname": "todo-backend",
-      "environment": [
-        {
-          "name": "SPRING_APPLICATION_JSON",
-          "value": "{\"spring.datasource.url\": \"jdbc:mysql://todo-mysql:3306/todo?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true\",\"spring.datasource.username\": \"root\",\"spring.datasource.password\": \"J~Q2xXBRGpmU)C!1oJbn\",\"spring.datasource.driver-class-name\": \"com.mysql.cj.jdbc.Driver\",\"spring.datasource.initialization-mode\": \"always\",\"spring.jpa.show-sql\": \"true\",\"spring.jpa.hibernate.ddl-auto\": \"update\",\"spring.jpa.properties.hibernate.dialect\": \"org.hibernate.dialect.MySQL5InnoDBDialect\"}"
-        }
-      ],
-      "dependsOn": [
-        {
-          "containerName": "todo-mysql",
-          "condition": "START"
-        }
-      ],
       "portMappings": [
         {
-          "hostPort": 8080,
+          "hostPort": 5000,
           "containerPort": 8080
         }
       ],
-      "essential": true,
       "memory": 2048
-    },
-    {
-      "name": "todo-mysql",
-      "image": "mysql:8.0.30",
-      "hostname": "todo-mysql",
-      "environment": [
-        {
-          "name": "MYSQL_ROOT_PASSWORD",
-          "value": "J~Q2xXBRGpmU)C!1oJbn"
-        },
-        {
-          "name": "MYSQL_DATABASE",
-          "value": "todo"
-        }
-      ],
-      "portMappings": [
-        {
-          "hostPort": 3306,
-          "containerPort": 3306
-        }
-      ],
-      "memory": 256
     }
   ]
 }
