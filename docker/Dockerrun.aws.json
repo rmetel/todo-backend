@@ -33,7 +33,7 @@
     },
     {
       "name": "todo-backend",
-      "image": "rmetel/todo-backend:1.12",
+      "image": "rmetel/todo-backend:1.13",
       "hostname": "todo-backend",
       "portMappings": [
         {
