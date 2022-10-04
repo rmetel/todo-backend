@@ -21,7 +21,7 @@
     },
     {
       "name": "todo-frontend",
-      "image": "rmetel/todo-frontend:1.8",
+      "image": "rmetel/todo-frontend:1.9",
       "hostname": "todo-frontend",
       "portMappings": [
         {
@@ -33,7 +33,7 @@
     },
     {
       "name": "todo-backend",
-      "image": "rmetel/todo-backend:1.16",
+      "image": "rmetel/todo-backend:1.17",
       "hostname": "todo-backend",
       "portMappings": [
         {
