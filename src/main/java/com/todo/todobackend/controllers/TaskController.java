@@ -18,7 +18,7 @@ import java.util.Optional;
         "http://localhost:8080",
         "http://localhost:3000",
         "http://localhost:5000",
-        "http://aws-env.eba-qwpyp72f.eu-central-1.elasticbeanstalk.com"
+        "http://todo-app.eu-central-1.elasticbeanstalk.com/"
 })
 public class TaskController {
     @Autowired
