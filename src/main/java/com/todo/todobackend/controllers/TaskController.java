@@ -13,7 +13,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = {"http://localhost", "http://localhost:8080", "http://localhost:3000", "http://localhost:5000"})
+@CrossOrigin(origins = {
+        "http://localhost",
+        "http://localhost:8080",
+        "http://localhost:3000",
+        "http://localhost:5000",
+        "http://aws-env.eba-qwpyp72f.eu-central-1.elasticbeanstalk.com"
+})
 public class TaskController {
     @Autowired
     private TaskService taskService;
