@@ -4,8 +4,7 @@ services:
 
   todo-nginx:
     container_name: todo-nginx
-    build:
-      dockerfile: todo-nginx.dockerfile
+    image: rmetel/todo-nginx:1.2
     ports:
       - "80:80"
     depends_on:
@@ -16,7 +15,7 @@ services:
 
   todo-frontend:
     container_name: todo-frontend
-    image: rmetel/todo-frontend:1.1
+    image: rmetel/todo-frontend:1.6
     ports:
       - "3000:3000"
     networks:
@@ -24,9 +23,9 @@ services:
 
   todo-backend:
     container_name: todo-backend
-    image: rmetel/todo-backend:1.1
+    image: rmetel/todo-backend:1.12
     ports:
-      - "8080:8080"
+      - "5000:8080"
     depends_on:
       - todo-database
     networks:
