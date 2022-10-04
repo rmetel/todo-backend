@@ -17,4 +17,5 @@ public class Task {
     private Integer id;
 
     String description;
+    boolean done;
 }

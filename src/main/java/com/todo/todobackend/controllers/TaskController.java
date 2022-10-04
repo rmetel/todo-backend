@@ -68,4 +68,9 @@ public class TaskController {
     public Optional<Task> getTaskById(@PathVariable String id) {
         return taskService.findById(Integer.parseInt(id));
     }
+
+    @PutMapping("tasks/{id}")
+    public Task updateTask(@RequestBody Task task) {
+        return taskService.updateTask(task);
+    }
 }

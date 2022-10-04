@@ -31,6 +31,22 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public Task updateTask(Task task) {
+        try {
+            Optional<Task> existingTask = taskRepository.findById(task.getId());
+            if(existingTask.isPresent()) {
+                existingTask.get().setDescription(task.getDescription());
+                existingTask.get().setDone(task.isDone());
+                return taskRepository.save(existingTask.get());
+            }
+        } catch (Exception e) {
+
+        }
+
+        return null;
+    }
+
+    @Override
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }

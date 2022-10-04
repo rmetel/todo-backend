@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface TaskService {
     Task addTask(Task task);
     boolean deleteTask(Task task);
+    Task updateTask(Task task);
     List<Task> getAllTasks();
     Optional<Task> findById(int id);
 }
