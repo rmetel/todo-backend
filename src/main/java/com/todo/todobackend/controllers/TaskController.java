@@ -15,6 +15,8 @@ import java.util.Optional;
 @RequestMapping("/api")
 @CrossOrigin(origins = {
         "http://localhost",
+        "http://localhost:80",
+        "http://localhost:81",
         "http://localhost:8080",
         "http://localhost:3000",
         "http://localhost:5000",
