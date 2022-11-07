@@ -2,12 +2,13 @@ version: '3'
 
 services:
 
-  container_name: todo-database
-  image: mysql:8.0.30
-  environment:
-    MYSQL_ROOT_PASSWORD: todo
-    MYSQL_DATABASE: todo
-  ports:
-    - "3306:3306"
-  #volumes:
-  #  - "C:/Users/rame/db:/var/lib/mysql:rw"
+  local-db:
+    container_name: local-database
+    image: mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: todo
+      MYSQL_DATABASE: todo
+    ports:
+      - "3306:3306"
+    #volumes:
+    #  - "C:/Users/rame/db:/var/lib/mysql:rw"
