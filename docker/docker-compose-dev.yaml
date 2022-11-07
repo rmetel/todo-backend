@@ -4,7 +4,7 @@ services:
 
   todo-nginx:
     container_name: todo-nginx
-    image: rmetel/todo-nginx:1.2
+    image: rmetel/todo-nginx:1.3
     ports:
       - "80:80"
     depends_on:
@@ -23,7 +23,7 @@ services:
 
   todo-backend:
     container_name: todo-backend
-    image: rmetel/todo-backend:1.17
+    image: rmetel/todo-backend:1.0.20
     ports:
       - "5000:5000"
     depends_on:
