@@ -26,11 +26,13 @@ services:
     image: rmetel/todo-backend:1.0.20
     ports:
       - "5000:5000"
+    depends_on:
+      - todo-database
     networks:
       - isolated
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url": "jdbc:mysql://localhost:3306/todo?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true",
+        "spring.datasource.url": "jdbc:mysql://todo-database:3306/todo?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true",
         "spring.datasource.username": "root",
         "spring.datasource.password": "todo",
         "spring.datasource.driver-class-name": "com.mysql.cj.jdbc.Driver",
@@ -39,6 +41,17 @@ services:
         "spring.jpa.hibernate.ddl-auto": "update",
         "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"
       }'
+
+  todo-database:
+    container_name: todo-database
+    image: mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: todo
+      MYSQL_DATABASE: todo
+    ports:
+      - "3306:3306"
+    networks:
+      - isolated
 
 networks:
   isolated: {}
