@@ -4,9 +4,9 @@ services:
 
   todo-nginx:
     container_name: todo-nginx
-    image: rmetel/todo-nginx:1.3
+    image: rmetel/todo-nginx:1.4
     ports:
-      - "81:81"
+      - "80:80"
     depends_on:
       - todo-backend
       - todo-frontend
@@ -30,9 +30,9 @@ services:
       - isolated
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url": "jdbc:mysql://todo.c9dqwrxvc0jg.eu-central-1.rds.amazonaws.com:3306/todo?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true",
+        "spring.datasource.url": "jdbc:mysql://local-database:3306/todo?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true",
         "spring.datasource.username": "root",
-        "spring.datasource.password": "J~Q2xXBRGpmU)C!1oJbn",
+        "spring.datasource.password": "todo",
         "spring.datasource.driver-class-name": "com.mysql.cj.jdbc.Driver",
         "spring.datasource.initialization-mode": "always",
         "spring.jpa.show-sql": "true",
