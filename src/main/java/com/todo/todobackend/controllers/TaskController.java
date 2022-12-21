@@ -20,7 +20,8 @@ import java.util.Optional;
         "http://localhost:8080",
         "http://localhost:3000",
         "http://localhost:5000",
-        "http://212.227.201.99" // IONOS
+        "http://212.227.201.99", // IONOS
+        "http://todo-app.tech/" // IONOS
 })
 public class TaskController {
     @Autowired
