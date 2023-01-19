@@ -15,7 +15,7 @@ services:
 
   todo-frontend:
     container_name: todo-frontend
-    image: rmetel/todo-frontend:1.11
+    image: rmetel/todo-frontend:1.12
     ports:
       - "3000:3000"
     networks:
