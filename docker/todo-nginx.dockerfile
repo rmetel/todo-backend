@@ -13,6 +13,6 @@ CMD [ "nginx", "-g", "daemon off;" ]
 # docker run --name todo-nginx -dp 80:80 todo-nginx
 
 # docker hub
-# docker build -t rmetel/todo-nginx:1.0 -f docker/todo-nginx.dockerfile .
-# docker push rmetel/todo-nginx:1.0
-# docker run --name todo-nginx -dp 8080:8080 rmetel/todo-nginx:1.0
+# docker build -t ddrram/todo-nginx:1.1.0 -f docker/todo-nginx.dockerfile .
+# docker push ddrram/todo-nginx:1.1.0
+# docker run --name todo-nginx -dp 8080:8080 ddrram/todo-nginx:1.1.0
