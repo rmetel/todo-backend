@@ -17,7 +17,7 @@ docker run --name teamcity-agent \
 
 docker run --name teamcity-agent-docker \
     -e SERVER_URL="http://212.227.201.99:8111" \
+    -e DOCKER_IN_DOCKER=start \
     -v team_city_agent_config_docker:/data/teamcity_agent/conf \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /usr/local/bin/docker:/usr/bin/docker \
     -d jetbrains/teamcity-agent
