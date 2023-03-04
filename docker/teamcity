@@ -1,0 +1,23 @@
+# init teamcity
+docker pull jetbrains/teamcity-server
+
+docker run --name teamcity-server-instance-4  \
+    -v teamcity_data:/data/teamcity_server/datadir \
+    -v teamcity_logs:/opt/teamcity/logs  \
+    -p 8111:8111 \
+    -d jetbrains/teamcity-server
+
+# init build agent
+docker pull jetbrains/teamcity-agent
+
+docker run --name teamcity-agent \
+    -e SERVER_URL="http://212.227.201.99:8111" \
+    -v teamcity_agent:/data/teamcity_agent/conf \
+    -d jetbrains/teamcity-agent
+
+docker run --name teamcity-agent-docker \
+    -e SERVER_URL="http://212.227.201.99:8111" \
+    -v team_city_agent_config_docker:/data/teamcity_agent/conf \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /usr/local/bin/docker:/usr/bin/docker \
+    -d jetbrains/teamcity-agent
