@@ -15,6 +15,7 @@ docker run --name teamcity-agent \
     -v teamcity_agent:/data/teamcity_agent/conf \
     -d jetbrains/teamcity-agent
 
+# init build agent docker
 docker run --name teamcity-agent-docker \
     -e SERVER_URL="http://212.227.201.99:8111" \
     -e DOCKER_IN_DOCKER=start \
