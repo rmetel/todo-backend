@@ -21,3 +21,5 @@ spec:
           image: ddrram/todo-frontend:1.1.0
           ports:
             - containerPort: 3000
+
+# kubectl apply -f todo-backend.deployment.yaml

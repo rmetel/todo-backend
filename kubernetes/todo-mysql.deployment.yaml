@@ -25,3 +25,5 @@ spec:
               value: root
             - name: MYSQL_DATABASE
               value: todo
+
+# kubectl apply -f todo-mysql.deployment.yaml
