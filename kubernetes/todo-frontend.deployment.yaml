@@ -22,4 +22,8 @@ spec:
           ports:
             - containerPort: 3000
 
-# kubectl apply -f todo-backend.deployment.yaml
+# run
+# kubectl apply -f todo-frontend.deployment.yaml
+
+# shutdown
+# kubectl scale --replicas=0 deployment/todo-frontend

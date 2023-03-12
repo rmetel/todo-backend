@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-mysql
+  name: todo-database
   labels:
-    app: todo-mysql
+    app: todo-database
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: todo-mysql
+      app: todo-database
   template:
     metadata:
       labels:
-        app: todo-mysql
+        app: todo-database
     spec:
       containers:
-        - name: todo-mysql
+        - name: todo-database
           image: mysql:8.0.30
           ports:
             - containerPort: 3306
@@ -26,4 +26,8 @@ spec:
             - name: MYSQL_DATABASE
               value: todo
 
-# kubectl apply -f todo-mysql.deployment.yaml
+# run
+# kubectl apply -f todo-database.deployment.yaml
+
+# shutdown
+# kubectl scale --replicas=0 deployment/todo-database
