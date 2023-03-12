@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: todo-frontend
+  labels:
+    app: todo-app
+    rel: stable
+spec:
+  containers:
+  - name: todo-nginx
+    image: ddrram/todo-nginx:1.1.0
+    ports:
+      - containerPort: 80
+  - name: todo-frontend
+    image: ddrram/todo-frontend:1.1.0
+    ports:
+      - containerPort: 3000
+  - name: todo-backend
+    image: ddrram/todo-backend:1.1.0
+    ports:
+      - containerPort: 5000
