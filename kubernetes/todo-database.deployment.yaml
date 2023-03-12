@@ -27,12 +27,12 @@ spec:
               value: todo
 #          volumeMounts:
 #            - name: my-db
-#              mountPath: /mysql:rw
+#              mountPath: C:/Users/ddr_r/db:/var/lib/mysql:rw
 #      volumes:
 #        - name: my-db
 #          hostPath:
 #            # directory location on host
-#            path: C:/Users/ddr_r/db:/var/lib/
+#            path: C:/Users/ddr_r/db:/var/lib/mysql:rw
 #            # this field is optional
 #            type: Directory
 
