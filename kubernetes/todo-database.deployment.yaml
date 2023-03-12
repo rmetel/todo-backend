@@ -25,6 +25,16 @@ spec:
               value: root
             - name: MYSQL_DATABASE
               value: todo
+#          volumeMounts:
+#            - name: my-db
+#              mountPath: /mysql:rw
+#      volumes:
+#        - name: my-db
+#          hostPath:
+#            # directory location on host
+#            path: C:/Users/ddr_r/db:/var/lib/
+#            # this field is optional
+#            type: Directory
 
 # run
 # kubectl apply -f todo-database.deployment.yaml
