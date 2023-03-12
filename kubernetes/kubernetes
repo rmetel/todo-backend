@@ -1,40 +1,20 @@
-1. mkdir kubernetes
+# install
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 
-2. cd kubernetes
+# create user
+kubectl apply -f dashboard-admin.yaml
 
-3. create dashboard-admin.yaml
-
-4. paste following:
-
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: admin-user
-  namespace: kubernetes-dashboard
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: admin-user
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: admin-user
-  namespace: kubernetes-dashboard
-
-5. kubectl apply -f dashboard-admin.yaml
-
-6. get token by:
-kubectl -n kubernetes-dashboard create token admin-user
-
-7. start dashboard:
+# start
 kubectl proxy
 
-8. auth by token
+# login
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
 
+# create token:
+kubectl -n kubernetes-dashboard create token admin-user
+
+# auth
+auth by token
 
 # links
 https://upcloud.com/resources/tutorials/deploy-kubernetes-dashboard
