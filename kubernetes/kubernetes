@@ -1,0 +1,36 @@
+1. mkdir kubernetes
+
+2. cd kubernetes
+
+3. create dashboard-admin.yaml
+
+4. paste following:
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+
+5. kubectl apply -f dashboard-admin.yaml
+
+6. get token by:
+kubectl -n kubernetes-dashboard create token admin-user
+
+7. start dashboard:
+kubectl proxy
+
+8. auth by token
