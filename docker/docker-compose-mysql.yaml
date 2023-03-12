@@ -2,19 +2,16 @@ version: '3'
 
 services:
 
-  local-frontend:
-    container_name: local-frontend
-    image: rmetel/todo-frontend:1.4
-    ports:
-      - "3000:3000"
-
   local-db:
     container_name: local-database
     image: mysql:8.0.30
     environment:
-      MYSQL_ROOT_PASSWORD: todo
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: todo
     ports:
       - "3306:3306"
     volumes:
-      - "C:/Users/rame/db:/var/lib/mysql:rw"
+      - "C:/Users/ddr_r/db:/var/lib/mysql:rw"
+
+
+# docker-compose -f docker/docker-compose-mysql.yaml up -d
