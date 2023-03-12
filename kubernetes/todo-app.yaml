@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: todo-frontend
+  name: todo-app
   labels:
     app: todo-app
     rel: stable
