@@ -34,3 +34,12 @@ kubectl -n kubernetes-dashboard create token admin-user
 kubectl proxy
 
 8. auth by token
+
+
+# links
+https://upcloud.com/resources/tutorials/deploy-kubernetes-dashboard
+https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/
+https://eskala.io/tutorial/how-to-write-yaml-files-for-kubernetes/
+https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-deployment-tutorial-example-yaml.html
+https://www.youtube.com/watch?v=7o7e8OAAWyg
+
