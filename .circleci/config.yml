@@ -16,6 +16,8 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: cimg/openjdk:11.0           
+    environment:
+         DOCKER_PASSWORD: immuTABLE\\\_4402
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
@@ -32,7 +34,7 @@ jobs:
           command: mvn -B -DskipTests clean package
       - run:
           name: Docker Login
-          command: docker login --username ddrram -p immuTABLE\\\_4402
+          command: echo $DOCKER_PASSWORD | docker login --username ddrram --password-stdin      
       # Then run your tests!
       #- run:
       #    name: Test
