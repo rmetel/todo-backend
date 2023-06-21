@@ -38,6 +38,9 @@ jobs:
           dockerfile: todo-backend.dockerfile 
           image: ddrram/todo-backend
           path: ./docker
+      - docker/push:
+          image: ddrram/todo-backend 
+          tag: latest,1.2.$CIRCLE_BUILD_NUM 
   #docker-push:
   #  docker:
       # replace with your preferred image
