@@ -32,3 +32,6 @@ ENTRYPOINT ["java","-jar","app.jar"]
 # docker build -t ddrram/todo-backend:1.1.0 -f docker/todo-backend.dockerfile .
 # docker push ddrram/todo-backend:1.1.0
 # docker run --name todo-backend -dp 8080:8080 ddrram/todo-backend:1.1.0
+
+# docker credentials store
+# docker --config .docker login https://index.docker.io/v1/
