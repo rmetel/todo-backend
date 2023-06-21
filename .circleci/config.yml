@@ -35,9 +35,9 @@ jobs:
       - image: cimg/base:stable
     steps:
       - docker/build:
-          tag: ddrram/todo-backend:1.3.0 
+          tag: 'latest,$CIRCLE_BUILD_NUM' 
           dockerfile: todo-backend.dockerfile 
-          image: todo-backend:1.3.0
+          image: todo-backend
           path: docker 
 
 # Invoke jobs via workflows
