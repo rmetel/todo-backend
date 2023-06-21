@@ -20,22 +20,22 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       # Checkout the code as the first step.
-      - checkout      
+      - checkout
+      # Build Docker images for deployment using the Docker execution environment
       - setup_remote_docker:
           version: 20.10.18
-      #- docker/configure-docker-credentials-store:
-      #    docker-config-path: /home/circleci/project/.docker/config.json
-      # Use mvn clean and package as the standard maven build phase
+      # Build JAR file
       - run:
           name: Maven build
           command: mvn -B -DskipTests clean package
-      - run:
-          name: Docker login
-          command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin      
       # Then run your tests!
       #- run:
       #    name: Test
       #    command: mvn test
+      # Docker steps
+      - run:
+          name: Docker login
+          command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin      
       - docker/build:
           docker-context: .
           tag: 'latest,1.2.$CIRCLE_BUILD_NUM' 
@@ -54,6 +54,3 @@ workflows:
       - Build:
           context:
             - build-context
-      #- docker-push:
-      #    requires:
-      #        - build-and-test
