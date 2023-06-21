@@ -35,10 +35,11 @@ jobs:
       - image: cimg/base:stable
     steps:
       - docker/build:
+          docker-context: .
           tag: 'latest,$CIRCLE_BUILD_NUM' 
           dockerfile: todo-backend.dockerfile 
-          image: todo-backend
-          path: docker 
+          image: ddrram/todo-backend
+          path: ./docker 
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
