@@ -29,17 +29,23 @@ jobs:
       #- run:
       #    name: Test
       #    command: mvn test
-  docker-push:
-    docker:
-      # replace with your preferred image
-      - image: cimg/base:stable
-    steps:
       - docker/build:
           docker-context: .
           tag: 'latest,$CIRCLE_BUILD_NUM' 
           dockerfile: ./docker/todo-backend.dockerfile 
           image: ddrram/todo-backend
-          path: ./docker 
+          path: ./docker
+  #docker-push:
+  #  docker:
+      # replace with your preferred image
+  #    - image: cimg/base:stable
+  #  steps:
+  #    - docker/build:
+  #        docker-context: .
+  #        tag: 'latest,$CIRCLE_BUILD_NUM' 
+  #        dockerfile: ./docker/todo-backend.dockerfile 
+  #        image: ddrram/todo-backend
+  #        path: ./docker 
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -48,6 +54,6 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
-      - docker-push:
-          requires:
-              - build-and-test
+      #- docker-push:
+      #    requires:
+      #        - build-and-test
