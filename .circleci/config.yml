@@ -37,7 +37,7 @@ jobs:
       - docker/build:
           docker-context: .
           tag: 'latest,$CIRCLE_BUILD_NUM' 
-          dockerfile: todo-backend.dockerfile 
+          dockerfile: ./docker/todo-backend.dockerfile 
           image: ddrram/todo-backend
           path: ./docker 
 
