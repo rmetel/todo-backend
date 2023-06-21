@@ -25,7 +25,7 @@ jobs:
       - setup_remote_docker:
           version: 20.10.18
       - docker/configure-docker-credentials-store:
-          docker-config-path: /home/circleci/project/.dockerr/config.json
+          docker-config-path: /home/circleci/project/.docker/config.json
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Maven Build
