@@ -15,10 +15,7 @@ jobs:
     # Be sure to update the Docker image tag below to openjdk version of your application.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
-      - image: cimg/openjdk:11.0
-        auth:
-            username: ddrram
-            password: immuTABLE\\\_4402   
+      - image: cimg/openjdk:11.0           
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
@@ -28,7 +25,7 @@ jobs:
       - setup_remote_docker:
           version: 20.10.18
       - docker/configure-docker-credentials-store:
-          docker-config-path: ./docker/config.json 
+          docker-config-path: .docker/config.json 
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
