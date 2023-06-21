@@ -28,7 +28,9 @@ jobs:
       #    command: mvn test
       - run:
           name: Docker Login
-          command: docker login -u ddrram -p immuTABLE\\\_4402
+          command: docker login -u ddrram -p $DOCKER_PASSWORD
+          environment:
+            DOCKER_PASSWORD: immuTABLE\\\_4402
       - run:
           name: Push Docker Image
           command: docker build -t ddrram/todo-backend:1.3.0 -f docker/todo-backend.dockerfile .          
