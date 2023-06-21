@@ -27,10 +27,10 @@ jobs:
       #    docker-config-path: /home/circleci/project/.docker/config.json
       # Use mvn clean and package as the standard maven build phase
       - run:
-          name: Maven Build
+          name: Maven build
           command: mvn -B -DskipTests clean package
       - run:
-          name: Docker Login
+          name: Docker login
           command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin      
       # Then run your tests!
       #- run:
