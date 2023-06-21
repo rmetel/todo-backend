@@ -24,11 +24,11 @@ jobs:
       # setup_remote_docker
       - setup_remote_docker:
           version: 20.10.18
-      - docker/configure-docker-credentials-store:
-          docker-config-path: .docker/config.json 
+      - docker/configure-docker-credentials-store
+      #    docker-config-path: .docker/config.json 
       # Use mvn clean and package as the standard maven build phase
       - run:
-          name: Build
+          name: Maven Build
           command: mvn -B -DskipTests clean package
       # Then run your tests!
       #- run:
