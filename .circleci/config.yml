@@ -27,8 +27,8 @@ jobs:
           root: .
           # Must be relative path from root
           paths:
-            - 'target/todo-backend-*-SNAPSHOT.jar'
-            - 'docker'
+            - target/todo-backend-*-SNAPSHOT.jar        
+            - docker
       - run: cd target && ls
       # Then run your tests!
       #- run:
@@ -77,3 +77,6 @@ workflows:
               - build-context
           requires:
             - Build
+          filters:
+            branches:
+              only: master
