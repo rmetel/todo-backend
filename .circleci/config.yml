@@ -27,9 +27,9 @@ jobs:
           root: .
           # Must be relative path from root
           paths:
-            - 'target'
+            - 'target/todo-backend-*-SNAPSHOT.jar'
             - 'docker'
-
+      - run: cd target && ls
       # Then run your tests!
       #- run:
       #    name: Test
@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Docker login
           command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin     
-             
+
       # Build Docker image
       - docker/build:
           docker-context: .
