@@ -1,3 +1,5 @@
+# https://www.ssh.com/academy/ssh/keygen
+
 # go to .ssh
 cd ~/.ssh
 

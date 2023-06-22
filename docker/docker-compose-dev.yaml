@@ -4,7 +4,7 @@ services:
 
   todo-nginx:
     container_name: todo-nginx
-    image: rmetel/todo-nginx:1.3
+    image: ddrram/todo-nginx:1.1.0
     ports:
       - "80:80"
     depends_on:
@@ -15,7 +15,7 @@ services:
 
   todo-frontend:
     container_name: todo-frontend
-    image: rmetel/todo-frontend:1.10
+    image: ddrram/todo-frontend:1.1.0
     ports:
       - "3000:3000"
     networks:
@@ -23,7 +23,7 @@ services:
 
   todo-backend:
     container_name: todo-backend
-    image: rmetel/todo-backend:1.0.20
+    image: ddrram/todo-backend:1.1.0
     ports:
       - "5000:5000"
     depends_on:
