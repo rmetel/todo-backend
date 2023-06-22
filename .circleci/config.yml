@@ -77,7 +77,7 @@ jobs:
             command: ssh-keyscan 212.227.201.99 >> ~/.ssh/known_hosts
         - run:
             name: Deploy over SSH
-            command: ssh $SSH_HOST@212.227.201.99 'mkdir test'
+            command: ssh $SSH_USER@212.227.201.99 'mkdir test'
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
