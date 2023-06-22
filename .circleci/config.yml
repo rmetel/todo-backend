@@ -65,6 +65,14 @@ jobs:
           image: ddrram/todo-backend           
           tag: latest,1.3.$CIRCLE_BUILD_NUM
 
+  Deploy:
+    machine:
+        enabled: true
+    steps:
+        - run:
+            name: Deploy Over SSH
+            command: ssh $SSH_USER@$SSH_HOST 'echo docker ps'
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
@@ -77,7 +85,10 @@ workflows:
             - build-context
           requires:
             - Build
-          filters:
-            branches:
-              ignore: /.*/
-              only: master
+          #filters:
+          #  branches:
+          #    ignore: /.*/
+          #    only: master
+      - Deploy:
+          requires:
+            - Docker Push
