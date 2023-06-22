@@ -7,7 +7,7 @@ orbs:
 
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  Build:    
+  build:    
     docker:
       - image: cimg/openjdk:11.0               
     # See: https://circleci.com/docs/configuration-reference/#steps
@@ -65,7 +65,7 @@ jobs:
           image: ddrram/todo-backend           
           tag: latest,1.3.$CIRCLE_BUILD_NUM
 
-  Deploy:
+  deploy:
     docker:
       - image: cimg/openjdk:11.0
     steps:
@@ -79,7 +79,7 @@ workflows:
   Maven Build: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      #- Build          
+      #- build          
       #- docker-push:
       #    context:
       #      - build-context
@@ -89,6 +89,8 @@ workflows:
           #  branches:
           #    ignore: /.*/
           #    only: master
-      - Deploy
+      - deploy:
+          context:
+            - build-context
           #requires:
           #  - docker-push
