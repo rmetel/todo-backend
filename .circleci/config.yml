@@ -74,10 +74,10 @@ jobs:
               - "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
         - run:
             name: Add known host
-            command: ssh-keyscan 212.227.201.99 >> ~/.ssh/known_hosts
+            command: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
         - run:
             name: Deploy over SSH
-            command: ssh $SSH_USER@212.227.201.99 'mkdir test'
+            command: ssh $SSH_USER@$SSH_HOST 'mkdir host'
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
