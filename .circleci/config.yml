@@ -35,7 +35,7 @@ jobs:
           # Must be relative path from root
           paths:
             - '*'
-      - run: ls
+      - run: cd target && ls
       # Then run your tests!
       #- run:
       #    name: Test
