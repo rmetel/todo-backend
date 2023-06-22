@@ -69,15 +69,15 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
     steps:
-        - add_ssh_keys:
-            fingerprints:
-              - "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
-        - run:
-            name: Add known host
-            command: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
-        - run:
-            name: Deploy over SSH
-            command: ssh $SSH_USER@$SSH_HOST 'mkdir host'
+      - add_ssh_keys:
+        fingerprints:
+          - "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
+      - run:
+          name: Add known host
+          command: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+      - run:
+          name: Deploy over SSH
+          command: ssh $SSH_USER@$SSH_HOST 'mkdir host'
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -90,7 +90,7 @@ workflows:
           context:
             - build-context
           requires:
-            - Build
+            - build
 #          filters:
 #            branches:
 #              only: master
