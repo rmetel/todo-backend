@@ -7,7 +7,7 @@ orbs:
 
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  Build:    
+  build:    
     docker:
       - image: cimg/openjdk:11.0               
     # See: https://circleci.com/docs/configuration-reference/#steps
@@ -35,7 +35,7 @@ jobs:
       #    name: Test
       #    command: mvn test
       
-  Docker Push:
+  docker-push:
     docker:
       - image: cimg/openjdk:11.0
     steps:
@@ -65,19 +65,38 @@ jobs:
           image: ddrram/todo-backend           
           tag: latest,1.3.$CIRCLE_BUILD_NUM
 
+  deploy:
+    docker:
+      - image: cimg/openjdk:11.0
+    steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
+        - run:
+            name: Add known host
+            command: ssh-keyscan 212.227.201.99 >> ~/.ssh/known_hosts
+        - run:
+            name: Deploy over SSH
+            command: ssh $SSH_USER@212.227.201.99 'mkdir test'
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   Maven Build: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - Build          
-      - Docker Push:
+      #- build          
+      #- docker-push:
+      #    context:
+      #      - build-context
+      #    requires:
+      #      - Build
+      #    #filters:
+          #  branches:
+          #    ignore: /.*/
+          #    only: master
+      - deploy:
           context:
             - build-context
-          requires:
-            - Build
-          filters:
-            branches:
-              ignore: /.*/
-              only: master
+          #requires:
+          #  - docker-push
