@@ -35,7 +35,7 @@ jobs:
       #    name: Test
       #    command: mvn test
       
-  Docker Push:
+  docker-push:
     docker:
       - image: cimg/openjdk:11.0
     steps:
@@ -80,7 +80,7 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - Build          
-      - Docker Push:
+      - docker-push:
           context:
             - build-context
           requires:
@@ -91,4 +91,4 @@ workflows:
           #    only: master
       - Deploy:
           requires:
-            - Docker Push
+            - docker-push
