@@ -36,7 +36,7 @@ jobs:
           paths:
             - 'target'
             - 'docker'
-      - run: cd target && ls
+      - run: ls
       # Then run your tests!
       #- run:
       #    name: Test
@@ -61,6 +61,7 @@ jobs:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
           at: .
+      - setup_remote_docker          
       - run: ls
       - run:
           name: Docker login
