@@ -79,16 +79,16 @@ workflows:
   Maven Build: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - Build          
-      - docker-push:
-          context:
-            - build-context
-          requires:
-            - Build
-          #filters:
+      #- Build          
+      #- docker-push:
+      #    context:
+      #      - build-context
+      #    requires:
+      #      - Build
+      #    #filters:
           #  branches:
           #    ignore: /.*/
           #    only: master
-      - Deploy:
-          requires:
-            - docker-push
+      - Deploy
+          #requires:
+          #  - docker-push
