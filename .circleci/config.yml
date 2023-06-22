@@ -29,7 +29,6 @@ jobs:
           paths:
             - target/todo-backend-*.jar
             - docker
-      - run: cd target && ls
 
       # Then run your tests!
       #- run:
@@ -78,6 +77,6 @@ workflows:
             - build-context
           requires:
             - Build
-          filters:
-            branches:
-              only: master
+          #filters:
+          #  branches:
+          #    only: master
