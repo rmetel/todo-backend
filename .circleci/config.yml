@@ -15,16 +15,12 @@ jobs:
       # Checkout the code as the first step.
       - checkout
 
-      # Build Docker images for deployment using the Docker execution environment
-      #- setup_remote_docker:
-      #    version: 20.10.18
-
       # Build JAR file
       - run:
           name: Maven build
           command: mvn -B -DskipTests clean package
 
-      # Share data    
+      # Save shared data
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
@@ -33,45 +29,42 @@ jobs:
           paths:
             - 'target'
             - 'docker'
-      #- run: ls
+
       # Then run your tests!
       #- run:
       #    name: Test
       #    command: mvn test
-      # Docker steps
-      #- run:
-      #    name: Docker login
-      #    command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin      
-      #- docker/build:
-      #    docker-context: .
-      #    path: ./docker
-      #    dockerfile: todo-backend.dockerfile
-      #    image: ddrram/todo-backend
-      #    tag: 'latest,1.2.$CIRCLE_BUILD_NUM'
-      #- docker/push:
-      #    image: ddrram/todo-backend           
-      #    tag: latest,1.2.$CIRCLE_BUILD_NUM
-  Docker Hub:
+      
+  Docker Push:
     docker:
       - image: cimg/openjdk:11.0
     steps:
+      # Access shared data
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
           at: .
-      - setup_remote_docker          
-      - run: ls
+
+      # Install Docker
+      - setup_remote_docker
+
+      # Login into Docker Hub
       - run:
           name: Docker login
-          command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin      
+          command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin     
+             
+      # Build Docker image
       - docker/build:
           docker-context: .
           path: ./docker
           dockerfile: todo-backend.dockerfile
           image: ddrram/todo-backend
           tag: 'latest,1.2.$CIRCLE_BUILD_NUM'
+
+      # Push Docker image
       - docker/push:
           image: ddrram/todo-backend           
           tag: latest,1.2.$CIRCLE_BUILD_NUM
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
@@ -79,7 +72,7 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - Build          
-      - Docker Hub:
+      - Docker Push:
           context:
               - build-context
           requires:
