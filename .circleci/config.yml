@@ -5,29 +5,26 @@ version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
 
-# Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  Build:
-    # These next lines define a Docker executor: https://circleci.com/docs/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the Docker image tag below to openjdk version of your application.
-    # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
+  Build:    
     docker:
       - image: cimg/openjdk:11.0               
-    # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       # Checkout the code as the first step.
       - checkout
+
       # Build Docker images for deployment using the Docker execution environment
-      - setup_remote_docker:
-          version: 20.10.18
+      #- setup_remote_docker:
+      #    version: 20.10.18
+
       # Build JAR file
       - run:
           name: Maven build
           command: mvn -B -DskipTests clean package
+
+      # Share data    
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
@@ -36,7 +33,7 @@ jobs:
           paths:
             - 'target'
             - 'docker'
-      - run: ls
+      #- run: ls
       # Then run your tests!
       #- run:
       #    name: Test
@@ -54,7 +51,7 @@ jobs:
       #- docker/push:
       #    image: ddrram/todo-backend           
       #    tag: latest,1.2.$CIRCLE_BUILD_NUM
-  Docker push:
+  Docker Hub:
     docker:
       - image: cimg/openjdk:11.0
     steps:
@@ -82,7 +79,7 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - Build          
-      - Docker push:
+      - Docker Hub:
           context:
               - build-context
           requires:
