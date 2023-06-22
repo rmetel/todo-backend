@@ -71,11 +71,12 @@ jobs:
     steps:
         - add_ssh_keys:
             fingerprints:
-              #- "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
-              - "SHA256:XKIyWxHFT4vZVeOgziUTtM9Zpv8VOWa+RlvLCRRw8Lk ralph.metel@gmx.de"
-        - run: echo $SSH_HOST
+              - "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
         - run:
-            name: Deploy Over SSH
+            name: Add known host
+            command: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+        - run:
+            name: Deploy over SSH
             command: ssh $SSH_USER@$SSH_HOST 'echo docker ps'
 
 # Invoke jobs via workflows
