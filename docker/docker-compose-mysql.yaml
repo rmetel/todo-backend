@@ -2,8 +2,8 @@ version: '3'
 
 services:
 
-  local-db:
-    container_name: local-database
+  todo-db:
+    container_name: todo-db
     image: mysql:8.0.30
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -11,7 +11,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - "C:/Users/ddr_r/db:/var/lib/mysql:rw"
+      - "C:/Users/ddr_r/databases/todo-db:/var/lib/mysql:rw"
+      #- "C:/Users/rame/databases/todo-db:/var/lib/mysql:rw"
 
 
 # docker-compose -f docker/docker-compose-mysql.yaml up -d
