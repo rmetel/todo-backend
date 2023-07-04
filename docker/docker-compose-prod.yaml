@@ -15,7 +15,7 @@ services:
 
   todo-frontend:
     container_name: todo-frontend
-    image: ddrram/todo-frontend:latest
+    image: ddrram/todo-frontend:1.3.34
     ports:
       - "3000:3000"
     networks:
