@@ -9,7 +9,7 @@ COPY docker/nginx.conf /etc/nginx/nginx.conf
 CMD [ "nginx", "-g", "daemon off;" ]
 
 # terminal
-# docker build -t todo-nginx -f todo-nginx.dockerfile .
+# docker build -t todo-nginx -f docker/todo-nginx.dockerfile .
 # docker run --name todo-nginx -dp 80:80 todo-nginx
 
 # docker hub
