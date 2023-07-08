@@ -10,7 +10,7 @@ WORKDIR /opt/app
 # cp target/spring-boot-web.jar /opt/app/app.jar
 COPY ${JAR_FILE} app.jar
 
-EXPOSE 8080
+EXPOSE 5000
 
 # java -jar /opt/app/app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
@@ -25,8 +25,8 @@ ENTRYPOINT ["java","-jar","app.jar"]
 #CMD mvn spring-boot:run
 
 # terminal
-# docker build -t todo-backend -f todo-backend.dockerfile .
-# docker run --name todo-backend -dp 8080:8080 todo-backend
+# docker build -t todo-backend -f docker/todo-backend.dockerfile .
+# docker run --name todo-backend -dp 5000:5000 todo-backend
 
 # docker hub
 # docker build -t ddrram/todo-backend:1.1.0 -f docker/todo-backend.dockerfile .

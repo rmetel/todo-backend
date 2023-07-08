@@ -1,7 +1,9 @@
-FROM mysql
+FROM mysql:8.0.30
 
+ENV MYSQL_DATABASE todo-db
 ENV MYSQL_ROOT_PASSWORD todo
-ENV MYSQL_DATABASE todo
+
+VOLUME "C:/Users/ddr_r/databases/todo-db:/var/lib/mysql:rw"
 
 EXPOSE 3306
 

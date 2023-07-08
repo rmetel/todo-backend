@@ -6,8 +6,8 @@ services:
     container_name: todo-db
     image: mysql:8.0.30
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: todo
+      MYSQL_DATABASE: todo-db
+      MYSQL_ROOT_PASSWORD: todo
     ports:
       - "3306:3306"
     volumes:
