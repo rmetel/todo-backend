@@ -1,16 +1,12 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
 orbs:
   docker: circleci/docker@2.2.0
 
-# See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   build:    
     docker:
       - image: cimg/openjdk:11.0               
-    # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       # Checkout the code as the first step.
       - checkout
@@ -79,11 +75,8 @@ jobs:
           name: Deploy over SSH
           command: ssh $SSH_USER@$SSH_HOST -f 'cd ~/logs && touch todo-backend-$(date +"%Y-%m-%d_%H-%M-%S").log && cd ~/git/todo-backend && git pull && docker-compose -f docker/docker-compose-prod.yaml up -d && exit'
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  Maven Build: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  Maven:
     jobs:
       - build
       - docker-push:
@@ -91,9 +84,6 @@ workflows:
             - build-context
           requires:
             - build
-#          filters:
-#            branches:
-#              only: master
       - deploy:
           context:
             - build-context
