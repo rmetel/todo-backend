@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ApiService {
-    void save(Api api);
+    void add(Api api);
+
+    Api update(Api api);
 
     void delete(Api api);
 

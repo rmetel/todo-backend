@@ -14,8 +14,21 @@ public class ApiServiceImpl implements ApiService {
     private ApiRepository apiRepository;
 
     @Override
-    public void save(Api api) {
+    public void add(Api api) {
         apiRepository.save(api);
+    }
+
+    @Override
+    public Api update(Api updatedApi) {
+        try {
+            Optional<Api> api = apiRepository.findById(updatedApi.getId());
+            if(api.isPresent()) {
+                return apiRepository.save(updatedApi);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return null;
     }
 
     @Override

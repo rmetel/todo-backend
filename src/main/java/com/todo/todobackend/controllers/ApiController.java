@@ -30,7 +30,7 @@ public class ApiController {
     }
 
     @GetMapping("/version")
-    public Api getDeployed() {
+    public Api getDeployedVersion() {
         Optional<Api> api;
         try {
             api = apiService.findByDeployedTrue();
@@ -44,12 +44,17 @@ public class ApiController {
 
     @PostMapping("/version")
     public Api add(@RequestBody Api api) {
-        return save(api);
+        try {
+            apiService.add(api);
+        } catch (Exception e) {
+            return null;
+        }
+        return api;
     }
 
     @PutMapping("/version")
     public Api update(@RequestBody Api api) {
-        return save(api);
+        return apiService.update(api);
     }
 
     @DeleteMapping("/version/{id}")
@@ -66,14 +71,5 @@ public class ApiController {
     @GetMapping("/version/{branch}")
     public Optional<Api> getByBranch(@PathVariable String branch) {
         return apiService.findByBranch(branch);
-    }
-
-    private Api save(Api api) {
-        try {
-            apiService.save(api);
-        } catch (Exception e) {
-            return null;
-        }
-        return api;
     }
 }
