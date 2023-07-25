@@ -1,12 +1,22 @@
 package com.todo.todobackend.models;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.*;
+
+@Entity
+@Builder
+@AllArgsConstructor
 @Getter
 @Setter
-@Builder
+@NoArgsConstructor
+@Table(name = "api")
 public class Api {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id;
+
+    String branch;
     String version;
+    boolean deployed;
 }

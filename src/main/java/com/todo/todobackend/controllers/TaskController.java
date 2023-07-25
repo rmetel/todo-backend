@@ -1,11 +1,9 @@
 package com.todo.todobackend.controllers;
 
-import com.todo.todobackend.models.Api;
 import com.todo.todobackend.models.Task;
 import com.todo.todobackend.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.info.BuildProperties;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,53 +25,40 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @Autowired
-    BuildProperties buildProperties;
-
-    @GetMapping("/version")
-    @Operation(description = "Gets api version")
-    public Api getVersion() {
-        return Api.builder()
-                .version(buildProperties.getVersion())
-                .build();
+    @GetMapping("/tasks")
+    public List<Task> getAll() {
+        return taskService.findAll();
     }
 
-    @GetMapping("/tasks")
-    @Operation(description = "Gets all tasks")
-    public List<Task> getAllTasks() {
-        return taskService.getAllTasks();
+    @GetMapping("/tasks/{id}")
+    public Optional<Task> getById(@PathVariable String id) {
+        return taskService.findById(Integer.parseInt(id));
     }
 
     @PostMapping("/tasks")
-    @Operation(description = "Adds a new task")
-    public Task addTask(@RequestBody Task task) {
+    public Task add(@RequestBody Task task) {
         try {
-            taskService.addTask(task);
+            taskService.add(task);
         } catch (Exception e) {
             return null;
         }
         return task;
     }
 
+    @PutMapping("tasks/{id}")
+    public Task update(@RequestBody Task task) {
+        return taskService.update(task);
+    }
+
     @DeleteMapping("/tasks/{id}")
     @Operation(description = "Deletes a task")
-    public boolean deleteTask(@PathVariable String id) {
+    public boolean delete(@PathVariable String id) {
         try {
             Optional<Task> task = taskService.findById(Integer.parseInt(id));
-            task.ifPresent(value -> taskService.deleteTask(value));
+            task.ifPresent(value -> taskService.delete(value));
         } catch (Exception e) {
             return false;
         }
         return true;
-    }
-
-    @GetMapping("/tasks/{id}")
-    public Optional<Task> getTaskById(@PathVariable String id) {
-        return taskService.findById(Integer.parseInt(id));
-    }
-
-    @PutMapping("tasks/{id}")
-    public Task updateTask(@RequestBody Task task) {
-        return taskService.updateTask(task);
     }
 }

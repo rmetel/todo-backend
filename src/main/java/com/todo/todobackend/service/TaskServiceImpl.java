@@ -14,24 +14,22 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
 
     @Override
-    public Task addTask(Task task) {
-        return taskRepository.save(task);
+    public void add(Task task) {
+        taskRepository.save(task);
     }
 
     @Override
-    public boolean deleteTask(Task task) {
+    public void delete(Task task) {
         try {
             taskRepository.delete(task);
-            return true;
         } catch (Exception e) {
 
         }
 
-        return false;
     }
 
     @Override
-    public Task updateTask(Task task) {
+    public Task update(Task task) {
         try {
             Optional<Task> existingTask = taskRepository.findById(task.getId());
             if(existingTask.isPresent()) {
@@ -47,7 +45,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getAllTasks() {
+    public List<Task> findAll() {
         return taskRepository.findAll();
     }
 
