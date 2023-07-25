@@ -8,4 +8,6 @@ export TODO_BACKEND_VERSION
 
 cd ~/git/todo-backend || exit
 
-git pull && docker-compose -f docker/docker-compose-prod.yaml up -d
+git pull
+
+docker-compose -f docker/docker-compose-prod.yaml up -d
