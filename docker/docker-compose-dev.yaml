@@ -2,18 +2,18 @@ version: '3'
 
 services:
 
-#  todo-nginx:
-#    container_name: todo-nginx
-#    image: todo-nginx
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#    depends_on:
-#      - todo-backend
-#      - todo-frontend
-#    networks:
-#      - todo-app
-#
+  todo-nginx:
+    container_name: todo-nginx
+    image: todo-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - todo-backend
+      - todo-frontend
+    networks:
+      - todo-app
+
   todo-frontend:
     container_name: todo-frontend
     image: todo-frontend

@@ -11,8 +11,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = {
+        "http://localhost",
+        "http://localhost:80",
+        "http://localhost:8080",
         "http://localhost:3000",
-        "https://localhost:3000",
+        "https://localhost",
+        "https://localhost:443",
         "http://212.227.201.99",
         "http://todo-app.tech/"
 })
