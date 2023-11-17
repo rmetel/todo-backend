@@ -12,6 +12,5 @@ services:
       - "3306:3306"
     volumes:
       - "C:/Users/ddr_r/databases/todo-db:/var/lib/mysql:rw"
-      #- "C:/Users/rame/databases/todo-db:/var/lib/mysql:rw"
 
 # docker-compose -f docker/docker-compose-mysql.yaml up -d
