@@ -1,2 +1,0 @@
-use todo;
-create table tasks (id integer not null auto_increment, description varchar(255), primary key (id))

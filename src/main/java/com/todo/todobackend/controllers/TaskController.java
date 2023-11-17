@@ -12,14 +12,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = {
-        "http://localhost",
-        "http://localhost:80",
-        "http://localhost:81",
-        "http://localhost:8080",
         "http://localhost:3000",
-        "http://localhost:5000",
-        "http://212.227.201.99", // IONOS
-        "http://todo-app.tech/" // IONOS
+        "https://localhost:3000",
+        "http://212.227.201.99",
+        "http://todo-app.tech/"
 })
 public class TaskController {
     @Autowired
