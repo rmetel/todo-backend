@@ -50,7 +50,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - "/usr/share/databases/todo-db:/var/lib/mysql:rw"
+      - "/root/usr/share/databases/todo-db:/var/lib/mysql:rw"
     networks:
       - todo-app
 
