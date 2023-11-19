@@ -49,10 +49,15 @@ services:
       MYSQL_ROOT_PASSWORD: todo
     ports:
       - "3306:3306"
+    volumes:
+      - "/usr/share/databases/todo-db:/var/lib/mysql:rw"
     networks:
       - todo-app
 
 networks:
   todo-app: {}
+
+volumes:
+  todo-db : {}
 
 # docker-compose -f docker/docker-compose-prod.yaml up -d
