@@ -3,13 +3,14 @@ version: '3'
 services:
   todo-nginx:
     container_name: todo-nginx
-    image: ddrram/todo-nginx-prod:1.1.1
+    image: ddrram/todo-nginx-cert:1.1.0
     ports:
       - "80:80"
       - "443:443"
     networks:
       - todo-app
     volumes:
+      - ./src/main/resources/static:/var/www/public
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     restart: always
@@ -22,7 +23,7 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email ralph.metel@gmx.de -d todo-app.tech --agree-tos
+    command: certonly --webroot -w /var/www/certbot --force-renewal --test-cert --email ralph.metel@gmx.de -d todo-app.tech --agree-tos
     networks:
       - todo-app
 
