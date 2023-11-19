@@ -4,8 +4,6 @@ WORKDIR /opt/app
 
 COPY . ./
 
-COPY ./pom.xml ./
-
 RUN mvn clean install -DskipTests
 
 RUN cp ./target/todo-backend-1.3.*-SNAPSHOT.jar ./app.jar
