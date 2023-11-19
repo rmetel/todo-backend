@@ -15,6 +15,7 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
+    restart: unless-stopped
 
   todo-certbot:
     image: certbot/certbot
@@ -33,6 +34,7 @@ services:
       - "3000:3000"
     networks:
       - todo-app
+    restart: unless-stopped
 
   todo-backend:
     container_name: todo-backend
@@ -54,6 +56,7 @@ services:
         "spring.jpa.hibernate.ddl-auto": "update",
         "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"
       }'
+    restart: unless-stopped
 
   todo-db:
     container_name: todo-db
@@ -65,6 +68,7 @@ services:
       - "3306:3306"
     networks:
       - todo-app
+    restart: unless-stopped
 
 networks:
   todo-app: {}
