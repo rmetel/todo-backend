@@ -23,8 +23,10 @@ jobs:
           root: .
           # Must be relative path from root
           paths:
-            - target/todo-backend-*.jar
+            #- target/todo-backend-*.jar
             - docker
+            - src
+            - pom.xml
 
       # Then run your tests!
       #- run:
