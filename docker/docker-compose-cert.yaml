@@ -17,8 +17,8 @@ services:
   todo-certbot:
     image: certbot/certbot
     container_name: todo-certbot
-#    depends_on:
-#      - todo-nginx
+    depends_on:
+      - todo-nginx
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
