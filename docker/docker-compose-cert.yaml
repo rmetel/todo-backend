@@ -3,17 +3,16 @@ version: '3'
 services:
   todo-nginx:
     container_name: todo-nginx
-    image: ddrram/todo-nginx-cert:1.1.0
+    image: ddrram/todo-nginx-cert:1.1.3
     ports:
       - "80:80"
-      - "443:443"
+#      - "443:443"
     networks:
       - todo-app
     volumes:
-      - ./src/main/resources/static:/var/www/public
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    restart: always
+    restart: unless-stopped
 
   todo-certbot:
     image: certbot/certbot
@@ -30,4 +29,4 @@ services:
 networks:
   todo-app: {}
 
-# docker-compose -f docker/docker-compose-prod.yaml up -d
+# docker-compose -f docker/docker-compose-cert.yaml up -d
