@@ -18,7 +18,9 @@ import java.util.Optional;
         "https://localhost",
         "https://localhost:443",
         "http://212.227.201.99",
-        "http://todo-app.tech/"
+        "https://212.227.201.99",
+        "http://todo-app.tech/",
+        "https://todo-app.tech/"
 })
 public class ApiController {
     @Autowired
