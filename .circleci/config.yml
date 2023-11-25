@@ -14,7 +14,12 @@ jobs:
       # Echo branch
       - run:
           name: Echo branch name
-          command: git name-rev --name-only HEAD
+          command: echo ${CIRCLE_BRANCH}
+
+      # Echo version
+      - run:
+          name: Echo version
+          command: echo $(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)
 
       # Build JAR file
       - run:
