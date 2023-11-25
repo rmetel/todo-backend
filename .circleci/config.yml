@@ -111,7 +111,7 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST "echo '<version>${BUILD_VERSION}</version>\n<branch>${CIRCLE_BRANCH}</branch>' > ~/logs/build/todo-backend.log && bash $WORK_DIR/$DEPLOY_SCRIPT && exit"
+            ssh $SSH_USER@$SSH_HOST "echo -en '<version>${BUILD_VERSION}</version>\n<branch>${CIRCLE_BRANCH}</branch>' > ~/logs/build/todo-backend.log && bash $WORK_DIR/$DEPLOY_SCRIPT && exit"
 
 workflows:
   Maven:
