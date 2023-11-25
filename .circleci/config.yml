@@ -11,6 +11,11 @@ jobs:
       # Checkout the code as the first step.
       - checkout
 
+      # Echo branch
+      - run:
+          name: Echo branch name
+          command: git name-rev --name-only HEAD
+
       # Build JAR file
       - run:
           name: Maven build
