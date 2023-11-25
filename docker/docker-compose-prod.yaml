@@ -3,14 +3,19 @@ version: '3'
 services:
   todo-nginx:
     container_name: todo-nginx
-    image: ddrram/todo-nginx:1.1.0
+    image: ddrram/todo-nginx-prod:1.2.3
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - todo-backend
       - todo-frontend
     networks:
       - todo-app
+    volumes:
+      - /root/usr/share/certbot/conf:/etc/letsencrypt
+#      - /root/usr/share/www:/var/www/certbot
+    restart: unless-stopped
 
   todo-frontend:
     container_name: todo-frontend
@@ -19,6 +24,7 @@ services:
       - "3000:3000"
     networks:
       - todo-app
+    restart: unless-stopped
 
   todo-backend:
     container_name: todo-backend
@@ -40,6 +46,7 @@ services:
         "spring.jpa.hibernate.ddl-auto": "update",
         "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"
       }'
+    restart: unless-stopped
 
   todo-db:
     container_name: todo-db
@@ -53,6 +60,7 @@ services:
       - "/root/usr/share/databases/todo-db:/var/lib/mysql:rw"
     networks:
       - todo-app
+    restart: unless-stopped
 
 networks:
   todo-app: {}

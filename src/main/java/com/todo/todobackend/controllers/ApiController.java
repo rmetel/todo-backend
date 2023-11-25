@@ -13,12 +13,14 @@ import java.util.Optional;
 @CrossOrigin(origins = {
         "http://localhost",
         "http://localhost:80",
-        "http://localhost:81",
         "http://localhost:8080",
         "http://localhost:3000",
-        "http://localhost:5000",
-        "http://212.227.201.99", // IONOS
-        "http://todo-app.tech/" // IONOS
+        "https://localhost",
+        "https://localhost:443",
+        "http://212.227.201.99",
+        "https://212.227.201.99",
+        "http://todo-app.tech/",
+        "https://todo-app.tech/"
 })
 public class ApiController {
     @Autowired
