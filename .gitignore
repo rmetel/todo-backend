@@ -37,3 +37,6 @@ build/
 # certificates
 cert.key
 cert.crt
+
+# meta
+meta.txt

@@ -2,9 +2,12 @@ package com.todo.todobackend.controllers;
 
 import com.todo.todobackend.models.Api;
 import com.todo.todobackend.service.ApiService;
+import com.todo.todobackend.utils.FileReader;
+import com.todo.todobackend.utils.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,8 +35,17 @@ public class ApiController {
     }
 
     @GetMapping("/version")
-    public Api getDeployedVersion() {
-        Optional<Api> api;
+    public Api getDeployedVersion() throws IOException {
+        String metaFile = FileReader.getMetaFile();
+        String version = "";
+        String branch = "";
+
+        if (!metaFile.isEmpty()) {
+            version = Parser.parseTag("version", metaFile);
+            branch = Parser.parseTag("branch", metaFile);
+        }
+
+        /*Optional<Api> api;
         try {
             api = apiService.findByDeployedTrue();
         } catch (Exception e) {
@@ -41,7 +53,15 @@ public class ApiController {
         }
         return api.orElse(Api.builder()
                 .branch("unknown version")
-                .build());
+                .build());*/
+
+        return Api
+                .builder()
+                .id(1)
+                .version(version)
+                .branch(branch)
+                .deployed(true)
+                .build();
     }
 
     @PostMapping("/version")
