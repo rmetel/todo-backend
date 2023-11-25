@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.todo</groupId>
 	<artifactId>todo-backend</artifactId>
-	<version>1.3.303</version>
+	<version>1.3.304</version>
 	<name>todo-backend</name>
 	<description>todo-backend</description>
 	<properties>
