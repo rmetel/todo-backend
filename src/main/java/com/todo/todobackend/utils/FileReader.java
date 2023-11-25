@@ -24,7 +24,9 @@ public class FileReader {
         }));
 
         if (files.isPresent()) {
-            return FileReader.readFile(files.get()[0], Charset.defaultCharset());
+            if(files.get().length > 0) {
+                return FileReader.readFile(files.get()[0], Charset.defaultCharset());
+            }
         }
 
         return "";

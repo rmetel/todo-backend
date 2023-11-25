@@ -1,8 +1,7 @@
 #!/bin/sh
 
 TODO_FRONTEND_VERSION=$(cat ~/logs/build/todo-frontend.log)
-#TODO_BACKEND_VERSION=$(cat ~/logs/build/todo-backend.log)
-TODO_BACKEND_VERSION=$(grep -oPm2 "(?<=<version>)[^<]+" ~/logs/build/todo-backend.log | sed -n 2p)
+TODO_BACKEND_VERSION=$(grep -oPm1 "(?<=<version>)[^<]+" ~/logs/build/todo-backend.log)
 
 export TODO_FRONTEND_VERSION
 export TODO_BACKEND_VERSION
