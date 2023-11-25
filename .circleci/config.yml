@@ -56,11 +56,6 @@ jobs:
           name: Echo build version
           command: echo ${BUILD_VERSION}
 
-#      # Echo build number
-#      - run:
-#          name: Echo build number
-#          command: echo $BUILD_NUMBER
-
       # Login into Docker Hub
       - run:
           name: Docker login
@@ -116,7 +111,7 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST "echo ${BUILD_VERSION} > ~/logs/todo-backend.log && bash $WORK_DIR/$DEPLOY_SCRIPT && exit"
+            ssh $SSH_USER@$SSH_HOST "echo '<version>${BUILD_VERSION}</version>\n<branch>${CIRCLE_BRANCH}</branch>' > ~/logs/build/todo-backend.log && bash $WORK_DIR/$DEPLOY_SCRIPT && exit"
 
 workflows:
   Maven:
