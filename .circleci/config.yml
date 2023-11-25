@@ -18,8 +18,14 @@ jobs:
 
       # Echo version
       - run:
+          name: Set version
+#          command: echo $(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)
+          command: echo 'export BUILD_VERSION=$(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)' >> "$BASH_ENV"
+
+      # Echo version
+      - run:
           name: Echo version
-          command: echo $(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)
+          command: echo ${BUILD_VERSION}
 
       # Build JAR file
       - run:
