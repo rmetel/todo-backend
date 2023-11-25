@@ -16,16 +16,7 @@ jobs:
           name: Echo branch name
           command: echo ${CIRCLE_BRANCH}
 
-      # Echo version
-      - run:
-          name: Set version
-#          command: echo $(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)
-          command: echo 'export BUILD_VERSION=$(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)' >> "$BASH_ENV"
 
-      # Echo version
-      - run:
-          name: Echo version
-          command: echo ${BUILD_VERSION}
 
       # Build JAR file
       - run:
@@ -51,9 +42,8 @@ jobs:
   push:
     docker:
       - image: cimg/openjdk:11.0
-    environment:
+#    environment:
 #      BUILD_NUMBER: << pipeline.number >>
-      BUILD_NUMBER: $(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)
     steps:
       # Access shared data
       - attach_workspace:
@@ -63,10 +53,20 @@ jobs:
       # Install Docker
       - setup_remote_docker
 
-      # Echo build number
+      # Set build version
       - run:
-          name: Echo build number
-          command: echo $BUILD_NUMBER
+          name: Set build version
+          command: echo 'export BUILD_VERSION=$(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)' >> "$BASH_ENV"
+
+      # Echo build version
+      - run:
+          name: Echo build version
+          command: echo ${BUILD_VERSION}
+
+#      # Echo build number
+#      - run:
+#          name: Echo build number
+#          command: echo $BUILD_NUMBER
 
       # Login into Docker Hub
       - run:
@@ -79,12 +79,12 @@ jobs:
           path: ./docker
           dockerfile: todo-backend.dockerfile
           image: ddrram/todo-backend
-          tag: 1.3.$BUILD_NUMBER
+          tag: ${BUILD_VERSION}
 
       # Push Docker image
       - docker/push:
           image: ddrram/todo-backend           
-          tag: 1.3.$BUILD_NUMBER
+          tag: ${BUILD_VERSION}
   deploy:
     docker:
       - image: cimg/openjdk:11.0
@@ -93,16 +93,20 @@ jobs:
       DEPLOY_SCRIPT: deploy.sh
       WORK_DIR: ~/git/todo-backend
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
+      # Echo build version
       - run:
-          name: Add known host
-          command: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
-      - run:
-          name: Deploy over SSH
-          command: |
-            ssh $SSH_USER@$SSH_HOST "echo 1.3.$BUILD_NUMBER > ~/logs/todo-backend.log && bash $WORK_DIR/$DEPLOY_SCRIPT && exit"
+          name: Echo build version
+          command: echo ${BUILD_VERSION}
+#      - add_ssh_keys:
+#          fingerprints:
+#            - "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
+#      - run:
+#          name: Add known host
+#          command: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+#      - run:
+#          name: Deploy over SSH
+#          command: |
+#            ssh $SSH_USER@$SSH_HOST "echo 1.3.$BUILD_NUMBER > ~/logs/todo-backend.log && bash $WORK_DIR/$DEPLOY_SCRIPT && exit"
 
 workflows:
   Maven:
