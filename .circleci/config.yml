@@ -46,7 +46,8 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
     environment:
-      BUILD_NUMBER: << pipeline.number >>
+#      BUILD_NUMBER: << pipeline.number >>
+      BUILD_NUMBER: $(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)
     steps:
       # Access shared data
       - attach_workspace:
