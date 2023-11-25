@@ -23,6 +23,7 @@ jobs:
           root: .
           # Must be relative path from root
           paths:
+            - .git
             - docker
             - src
             - pom.xml
