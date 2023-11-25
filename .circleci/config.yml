@@ -8,22 +8,15 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
     steps:
-      # Checkout the code as the first step.
+      # Checkout code as the first step.
       - checkout
 
-      # Echo branch
-      - run:
-          name: Echo branch name
-          command: echo ${CIRCLE_BRANCH}
-
-
-
-      # Build JAR file
+      # Build jar file
       - run:
           name: Maven build
           command: mvn -B -DskipTests clean package
 
-      # Save shared data
+      # Share data
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
@@ -85,6 +78,13 @@ jobs:
       - docker/push:
           image: ddrram/todo-backend           
           tag: ${BUILD_VERSION}
+
+      # Save pom.xml to retrieve version
+      - persist_to_workspace:
+          root: .
+          paths:
+            - pom.xml
+
   deploy:
     docker:
       - image: cimg/openjdk:11.0
@@ -93,20 +93,31 @@ jobs:
       DEPLOY_SCRIPT: deploy.sh
       WORK_DIR: ~/git/todo-backend
     steps:
-      # Echo build version
+      # Access shared data
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: .
+
+      - run:
+          name: Set build version
+          command: echo 'export BUILD_VERSION=$(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)' >> "$BASH_ENV"
+
       - run:
           name: Echo build version
           command: echo ${BUILD_VERSION}
-#      - add_ssh_keys:
-#          fingerprints:
-#            - "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
-#      - run:
-#          name: Add known host
-#          command: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
-#      - run:
-#          name: Deploy over SSH
-#          command: |
-#            ssh $SSH_USER@$SSH_HOST "echo 1.3.$BUILD_NUMBER > ~/logs/todo-backend.log && bash $WORK_DIR/$DEPLOY_SCRIPT && exit"
+
+      - add_ssh_keys:
+          fingerprints:
+            - "2b:a4:ba:38:78:e6:13:5e:53:bc:8e:8b:59:3a:c0:fe"
+
+      - run:
+          name: Add known host
+          command: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+
+      - run:
+          name: Deploy over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "echo 1.3.$BUILD_NUMBER > ~/logs/todo-backend.log && bash $WORK_DIR/$DEPLOY_SCRIPT && exit"
 
 workflows:
   Maven:
@@ -117,8 +128,8 @@ workflows:
             - build-context
           requires:
             - build
-      - deploy:
-          context:
-            - build-context
-          requires:
-            - push
+#      - deploy:
+#          context:
+#            - build-context
+#          requires:
+#            - push
