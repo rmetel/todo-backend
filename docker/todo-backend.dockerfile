@@ -1,4 +1,5 @@
-FROM adoptopenjdk/maven-openjdk11
+#FROM adoptopenjdk/maven-openjdk11
+FROM csanchez/maven:3.9.5-eclipse-temurin-11
 
 WORKDIR /opt/app
 
@@ -6,7 +7,7 @@ COPY . ./
 
 RUN mvn clean install -DskipTests
 
-RUN cp ./target/todo-backend-1.3.*-SNAPSHOT.jar ./app.jar
+RUN cp ./target/todo-backend-*.jar ./app.jar
 
 EXPOSE 5000
 

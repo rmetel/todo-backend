@@ -6,6 +6,5 @@ kubernetes
 ssh
 target
 .dockerignore
-.git
 .gitignore
 deploy.sh
