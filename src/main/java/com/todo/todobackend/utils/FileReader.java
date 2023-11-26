@@ -12,14 +12,14 @@ import java.util.Optional;
 
 public class FileReader {
 
-    final static String DIRECTORY = ".";
+    final static String DIRECTORY = "./logs/build";
 
     public static String getMetaFile() throws IOException {
         File folder = new File(DIRECTORY);
         Optional<File[]> files = Optional.ofNullable(folder.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                return file.isFile() && file.getName().equalsIgnoreCase("meta.log") && !file.isHidden();
+                return file.isFile() && file.getName().equalsIgnoreCase("todo-backend.log") && !file.isHidden();
             }
         }));
 
