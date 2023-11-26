@@ -3,7 +3,7 @@ version: '3'
 services:
   todo-nginx:
     container_name: todo-nginx
-    image: todo-nginx
+    image: todo-nginx-dev
     ports:
       - "80:80"
       - "443:443"
@@ -26,6 +26,8 @@ services:
     image: todo-backend
     ports:
       - "5000:5000"
+    volumes:
+      - /logs:/opt/app/logs
     depends_on:
       - todo-db
     networks:

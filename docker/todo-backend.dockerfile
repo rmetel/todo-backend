@@ -1,6 +1,10 @@
 #FROM adoptopenjdk/maven-openjdk11
 FROM csanchez/maven:3.9.5-eclipse-temurin-11
 
+RUN apt-get update
+
+RUN apt-get install nano
+
 WORKDIR /opt/app
 
 COPY . ./
@@ -8,10 +12,6 @@ COPY . ./
 RUN mvn clean install -DskipTests
 
 RUN cp ./target/todo-backend-*.jar ./app.jar
-
-#RUN echo version=$(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p) > meta.txt
-#
-#RUN echo branch=$(git rev-parse --abbrev-ref HEAD) >> meta.txt
 
 EXPOSE 5000
 
