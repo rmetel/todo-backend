@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TODO_FRONTEND_VERSION=$(cat ~/logs/build/todo-frontend.log)
+TODO_FRONTEND_VERSION=$(cat ~/logs/todo-frontend.log)
 TODO_BACKEND_VERSION=$(grep -oPm1 "(?<=<version>)[^<]+" ~/logs/build/todo-backend.log)
 TODO_BACKEND_BRANCH=$(grep -oPm1 "(?<=<branch>)[^<]+" ~/logs/build/todo-backend.log)
 
