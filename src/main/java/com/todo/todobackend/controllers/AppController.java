@@ -41,14 +41,14 @@ public class AppController {
         String version = "";
 
         if (!metaFile.isEmpty()) {
-            version = Parser.parseTag("version", metaFile);
             branch = Parser.parseTag("branch", metaFile);
+            version = Parser.parseTag("version", metaFile);
         }
 
         return App
                 .builder()
-                .version(version)
                 .branch(branch)
+                .version(version)
                 .deployed(true)
                 .build();
     }

@@ -37,3 +37,5 @@ build/
 # certificates
 cert.key
 cert.crt
+
+./logs/

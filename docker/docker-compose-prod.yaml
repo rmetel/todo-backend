@@ -32,7 +32,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "~/logs:/opt/app/logs:r"
+      - /root/logs:/opt/app/logs
     depends_on:
       - todo-db
     networks:
@@ -68,7 +68,6 @@ networks:
   todo-app: {}
 
 volumes:
-  todo-backend : {}
-  todo-db : {}
+  todo-db: {}
 
 # docker-compose -f docker/docker-compose-prod.yaml up -d
