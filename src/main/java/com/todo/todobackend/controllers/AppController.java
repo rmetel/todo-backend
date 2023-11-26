@@ -1,6 +1,8 @@
 package com.todo.todobackend.controllers;
 
 import com.todo.todobackend.models.App;
+import com.todo.todobackend.utils.FileReader;
+import com.todo.todobackend.utils.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.info.BuildProperties;
@@ -26,24 +28,26 @@ import java.io.IOException;
         "https://todo-app.tech/"
 })
 public class AppController {
-    @Autowired
-    private BuildProperties buildProperties;
+//    @Autowired
+//    private BuildProperties buildProperties;
 
-    @Value("${git.branch}")
-    private String branch;
+//    @Value("${git.branch}")
+//    private String branch;
 
     @GetMapping("/version")
     public App getBuildInformation() throws IOException {
-        /*String metaFile = FileReader.getMetaFile();
+        String metaFile = FileReader.getMetaFile();
+        String branch = "";
         String version = "";
 
         if (!metaFile.isEmpty()) {
             version = Parser.parseTag("version", metaFile);
-        }*/
+            branch = Parser.parseTag("branch", metaFile);
+        }
 
         return App
                 .builder()
-                .version(buildProperties.getVersion())
+                .version(version)
                 .branch(branch)
                 .deployed(true)
                 .build();

@@ -19,7 +19,7 @@ public class FileReader {
         Optional<File[]> files = Optional.ofNullable(folder.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                return file.isFile() && file.getName().equalsIgnoreCase("meta.txt") && !file.isHidden();
+                return file.isFile() && file.getName().equalsIgnoreCase("meta.log") && !file.isHidden();
             }
         }));
 
