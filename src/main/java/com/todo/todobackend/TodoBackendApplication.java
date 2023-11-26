@@ -17,7 +17,7 @@ import org.springframework.core.io.ClassPathResource;
         description = "API for task administration",
         contact = @Contact(
                 name = "Ralph Metel",
-                email = "ralph.metel@exxeta.com"
+                email = "ralph.metel@gmx.de"
         )
 ))
 public class TodoBackendApplication {
