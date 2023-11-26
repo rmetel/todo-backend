@@ -32,7 +32,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "~/logs/build/todo-backend.log:/opt/app/meta.log:r"
+      - "~/logs/build:/opt/app:r"
     depends_on:
       - todo-db
     networks:
