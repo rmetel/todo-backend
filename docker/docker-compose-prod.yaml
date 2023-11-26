@@ -32,7 +32,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "~/logs/build:/opt/app:r"
+      - "~/logs:/opt/app/logs:r"
     depends_on:
       - todo-db
     networks:
