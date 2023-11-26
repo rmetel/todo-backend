@@ -11,7 +11,9 @@ export TODO_BACKEND_BRANCH
 
 cd ~/git/todo-backend || exit
 
-git switch "$TODO_BACKEND_BRANCH" && git pull
+#git switch "$TODO_BACKEND_BRANCH"
+
+git pull
 
 docker-compose -f docker/docker-compose-prod.yaml up -d
 
