@@ -37,6 +37,3 @@ build/
 # certificates
 cert.key
 cert.crt
-
-# meta
-meta.log
