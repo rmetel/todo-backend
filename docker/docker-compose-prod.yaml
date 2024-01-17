@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   todo-nginx:
@@ -14,7 +14,7 @@ services:
       - todo-app
     volumes:
       - /root/usr/share/certbot/conf:/etc/letsencrypt
-#      - /root/usr/share/www:/var/www/certbot
+    #      - /root/usr/share/www:/var/www/certbot
     restart: unless-stopped
 
   todo-frontend:
@@ -46,8 +46,7 @@ services:
         "spring.datasource.initialization-mode": "always",
         "spring.jpa.show-sql": "true",
         "spring.jpa.hibernate.ddl-auto": "update",
-        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"
-      }'
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"}'
     restart: unless-stopped
 
   todo-db:

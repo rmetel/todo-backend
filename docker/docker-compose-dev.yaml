@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   todo-nginx:
@@ -27,7 +27,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - /logs:/opt/app/logs
+      - ./logs/:/opt/app/logs
     depends_on:
       - todo-db
     networks:
@@ -41,8 +41,7 @@ services:
         "spring.datasource.initialization-mode": "always",
         "spring.jpa.show-sql": "true",
         "spring.jpa.hibernate.ddl-auto": "update",
-        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"
-      }'
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"}'
 
   todo-db:
     container_name: todo-db
@@ -61,6 +60,6 @@ networks:
   todo-app: {}
 
 volumes:
-  todo-db : {}
+  todo-db: {}
 
 # docker-compose -f docker/docker-compose-dev.yaml up -d
