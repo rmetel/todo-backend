@@ -29,7 +29,7 @@ services:
     networks:
       - todo-app
 #    command: sh -c "certbot renew && sleep 7d"
-#    command: certbot renew
+    command: renew
 #    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
   todo-frontend:
