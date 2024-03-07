@@ -26,10 +26,11 @@ services:
     volumes:
       - /root/usr/share/certbot/conf:/etc/letsencrypt
       - /root/usr/share/certbot/www:/var/www/certbot
-#    command: certbot renew
     networks:
       - todo-app
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    command: certbot renew && sleep 12h
+#    command: certbot renew
+#    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
   todo-frontend:
     container_name: todo-frontend
