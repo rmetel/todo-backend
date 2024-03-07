@@ -8,3 +8,5 @@ target
 .dockerignore
 .gitignore
 deploy.sh
+
+!/logs/build/
