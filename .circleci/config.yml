@@ -65,7 +65,7 @@ jobs:
       # Build Docker image
       - docker/build:
           docker-context: .
-          path: ./docker
+          path: ./docker/todo-app
           dockerfile: todo-backend.dockerfile
           image: ddrram/todo-backend
           tag: ${BUILD_VERSION}
