@@ -26,7 +26,9 @@ import java.io.IOException;
         "http://212.227.201.99",
         "https://212.227.201.99",
         "http://todo-app.tech/",
-        "https://todo-app.tech/"
+        "https://todo-app.tech/",
+        "http://devision.tech/",
+        "https://devision.tech/"
 })
 public class AppController {
 //    @Autowired
