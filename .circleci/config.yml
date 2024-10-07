@@ -3,10 +3,14 @@ version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
 
-jobs:
-  build:
+executors:
+  docker-container:
     docker:
       - image: cimg/openjdk:11.0
+
+jobs:
+  build:
+    executor: docker-container
     steps:
       # Checkout code as the first step.
       - checkout
@@ -34,8 +38,7 @@ jobs:
       #    command: mvn test
 
   push:
-    docker:
-      - image: cimg/openjdk:11.0
+    executor: docker-container
     #    environment:
     #      BUILD_NUMBER: << pipeline.number >>
     steps:
@@ -82,8 +85,7 @@ jobs:
             - pom.xml
 
   deploy:
-    docker:
-      - image: cimg/openjdk:11.0
+    executor: docker-container
     environment:
       DEPLOY_SCRIPT: ~/git/todo-backend/deploy.sh
     steps:
