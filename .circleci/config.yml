@@ -3,10 +3,14 @@ version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
 
-jobs:
-  build:    
+executors:
+  docker-container:
     docker:
       - image: cimg/openjdk:11.0
+
+jobs:
+  build:
+    executor: docker-container
     steps:
       # Checkout code as the first step.
       - checkout
@@ -32,12 +36,11 @@ jobs:
       #- run:
       #    name: Test
       #    command: mvn test
-      
+
   push:
-    docker:
-      - image: cimg/openjdk:11.0
-#    environment:
-#      BUILD_NUMBER: << pipeline.number >>
+    executor: docker-container
+    #    environment:
+    #      BUILD_NUMBER: << pipeline.number >>
     steps:
       # Access shared data
       - attach_workspace:
@@ -60,19 +63,19 @@ jobs:
       # Login into Docker Hub
       - run:
           name: Docker login
-          command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin     
+          command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin
 
       # Build Docker image
       - docker/build:
           docker-context: .
-          path: ./docker
+          path: ./docker/todo-app
           dockerfile: todo-backend.dockerfile
           image: ddrram/todo-backend
           tag: ${BUILD_VERSION}
 
       # Push Docker image
       - docker/push:
-          image: ddrram/todo-backend           
+          image: ddrram/todo-backend
           tag: ${BUILD_VERSION}
 
       # Save pom.xml to retrieve version
@@ -82,8 +85,7 @@ jobs:
             - pom.xml
 
   deploy:
-    docker:
-      - image: cimg/openjdk:11.0
+    executor: docker-container
     environment:
       DEPLOY_SCRIPT: ~/git/todo-backend/deploy.sh
     steps:
@@ -114,7 +116,7 @@ jobs:
             ssh $SSH_USER@$SSH_HOST "echo -en '<version>${BUILD_VERSION}</version>\n<branch>${CIRCLE_BRANCH}</branch>' > ~/logs/build/todo-backend.log && bash $DEPLOY_SCRIPT && exit"
 
 workflows:
-  Maven:
+  build_and_deploy:
     jobs:
       - build
       - push:
