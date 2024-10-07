@@ -4,7 +4,7 @@ orbs:
   docker: circleci/docker@2.2.0
 
 jobs:
-  build:    
+  build:
     docker:
       - image: cimg/openjdk:11.0
     steps:
@@ -32,12 +32,12 @@ jobs:
       #- run:
       #    name: Test
       #    command: mvn test
-      
+
   push:
     docker:
       - image: cimg/openjdk:11.0
-#    environment:
-#      BUILD_NUMBER: << pipeline.number >>
+    #    environment:
+    #      BUILD_NUMBER: << pipeline.number >>
     steps:
       # Access shared data
       - attach_workspace:
@@ -60,7 +60,7 @@ jobs:
       # Login into Docker Hub
       - run:
           name: Docker login
-          command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin     
+          command: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin
 
       # Build Docker image
       - docker/build:
@@ -72,7 +72,7 @@ jobs:
 
       # Push Docker image
       - docker/push:
-          image: ddrram/todo-backend           
+          image: ddrram/todo-backend
           tag: ${BUILD_VERSION}
 
       # Save pom.xml to retrieve version
@@ -111,10 +111,10 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST "echo -en '<version>${BUILD_VERSION}</version>\n<branch>${CIRCLE_BRANCH}</branch>' > ~/logs/build/todo-backend.log && bash $DEPLOY_SCRIPT && exit"
+            ssh $SSH_USER@$SSH_HOST "echo -en '<version>${BUILD_VERSION}</version>\n<branch>${CIRCLE_BRANCH}</branch>' > ~/logs/build/centouno-backend.log && bash $DEPLOY_SCRIPT && exit"
 
 workflows:
-  deploy:
+  build-pipeline:
     jobs:
       - build
       - push:
