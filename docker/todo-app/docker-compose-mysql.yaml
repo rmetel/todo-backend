@@ -1,7 +1,4 @@
-version: '3'
-
 services:
-
   todo-db:
     container_name: todo-db
     image: mysql:8.0.30

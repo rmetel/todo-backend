@@ -1,4 +1,3 @@
-#FROM adoptopenjdk/maven-openjdk11
 FROM csanchez/maven:3.9.5-eclipse-temurin-11
 
 RUN apt-get update
