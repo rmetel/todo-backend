@@ -60,7 +60,7 @@ services:
     image: mysql:8.0.30
     environment:
       MYSQL_DATABASE: todo-db
-      MYSQL_ROOT_PASSWORD: todo
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:

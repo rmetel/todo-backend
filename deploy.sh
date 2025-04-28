@@ -13,7 +13,7 @@ git switch "$TODO_BACKEND_BRANCH"
 
 git pull
 
-docker-compose -f docker/todo-app/docker-compose-prod.yaml up -d
+docker-compose --env-file /root/usr/share/.env -f docker/todo-app/docker-compose-prod.yaml up -d
 
 # retrieve version
 # docker inspect todo-backend | grep -o 'todo-backend:.*' | cut -f2 -d: | cut -f1 -d '"'
