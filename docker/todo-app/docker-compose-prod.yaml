@@ -30,9 +30,7 @@ services:
       - /root/usr/share/certbot/www:/var/www/certbot
     networks:
       - todo-app
-    entrypoint: sh -c "certbot renew && sleep 7d"
-  #    command: renew
-  #    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --quiet; sleep 12h & wait $${!}; done;'"
 
   todo-backend:
     container_name: todo-backend
