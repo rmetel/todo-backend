@@ -25,7 +25,7 @@ jobs:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
           root: .
-          # Must be relative path from root
+          # Must be a relative path from root
           paths:
             - .git
             - docker
