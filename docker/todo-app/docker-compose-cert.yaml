@@ -21,7 +21,7 @@ services:
     volumes:
       - /root/usr/share/certbot/conf:/etc/letsencrypt
       - /root/usr/share/certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email ralph.metel@gmx.de -d devision.tech --agree-tos
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email ralph.metel@gmx.de -d todotask.app --agree-tos
     networks:
       - todo-app
 
