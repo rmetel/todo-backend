@@ -17,7 +17,11 @@ services:
       - /root/usr/share/certbot/conf:/etc/letsencrypt
       - /root/usr/share/certbot/www:/var/www/certbot
     restart: unless-stopped
-    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+    command: >
+      sh -c "while :; do
+        nginx -s reload;
+        sleep 6h;
+      done & nginx -g 'daemon off;'"
 
   certbot-renewal:
     image: certbot/certbot
@@ -29,7 +33,11 @@ services:
       - /root/usr/share/certbot/www:/var/www/certbot
     networks:
       - todo-app
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --quiet; sleep 12h & wait $${!}; done;'"
+    entrypoint: >
+      sh -c "trap exit TERM; while :; do
+        certbot renew --quiet;
+        sleep 12h & wait $${!};
+      done;"
 
   todo-backend:
     container_name: todo-backend
@@ -110,9 +118,9 @@ services:
 #      - todo-app
 
 networks:
-  todo-app: {}
+  todo-app: { }
 
 volumes:
-  todo-db: {}
+  todo-db: { }
 #  todo-postgres: { }
 # docker-compose -f docker/todo-app/docker-compose-prod.yaml up -d
