@@ -22,10 +22,10 @@ jobs:
 
       # Share data
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container that is
           # taken to be the root directory of the workspace.
           root: .
-          # Must be relative path from root
+          # Must be a relative path from root
           paths:
             - .git
             - docker
@@ -44,13 +44,13 @@ jobs:
     steps:
       # Access shared data
       - attach_workspace:
-          # Must be absolute path or relative path from working_directory
+          # Must be an absolute path or relative path from working_directory
           at: .
 
       # Install Docker
       - setup_remote_docker
 
-      # Set build version
+      # Set the build version
       - run:
           name: Set build version
           command: echo 'export BUILD_VERSION=$(grep -oPm2 "(?<=<version>)[^<]+" pom.xml | sed -n 2p)' >> "$BASH_ENV"
@@ -78,7 +78,7 @@ jobs:
           image: ddrram/todo-backend
           tag: ${BUILD_VERSION}
 
-      # Save pom.xml to retrieve version
+      # Save pom.xml to retrieve a version
       - persist_to_workspace:
           root: .
           paths:
@@ -91,7 +91,7 @@ jobs:
     steps:
       # Access shared data
       - attach_workspace:
-          # Must be absolute path or relative path from working_directory
+          # Must be an absolute path or relative path from working_directory
           at: .
 
       - run:

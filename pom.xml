@@ -5,16 +5,18 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.7.18</version>
+		<relativePath/> <!-- lookup parent from a repository -->
 	</parent>
 	<groupId>com.todo</groupId>
 	<artifactId>todo-backend</artifactId>
-	<version>1.4.4</version>
+	<version>1.5.1</version>
 	<name>todo-backend</name>
 	<description>todo-backend</description>
 	<properties>
 		<java.version>11</java.version>
+		<!-- Manually override SnakeYAML to fix CVE-2022-1471 -->
+		<snakeyaml.version>2.0</snakeyaml.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -28,6 +30,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -44,12 +47,12 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.11</version>
+			<version>1.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-model</artifactId>
-			<version>3.3.9</version>
+			<version>3.9.6</version>
 		</dependency>
 	</dependencies>
 
@@ -76,9 +79,9 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<version>2.2.1</version>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>5.0.0</version>
 			</plugin>
 		</plugins>
 	</build>
