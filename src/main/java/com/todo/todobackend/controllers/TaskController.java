@@ -21,10 +21,8 @@ import java.util.Optional;
         "https://localhost:443",
         "http://212.227.201.99",
         "https://212.227.201.99",
-        "http://todo-app.tech/",
-        "https://todo-app.tech/",
-        "http://devision.tech/",
-        "https://devision.tech/"
+        "http://todotask.app/",
+        "https://todotask.app/"
 })
 public class TaskController {
     @Autowired
