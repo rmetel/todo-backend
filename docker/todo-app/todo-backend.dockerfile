@@ -1,4 +1,4 @@
-FROM csanchez/maven:3.9.5-eclipse-temurin-11
+FROM csanchez/maven:3.9.5-eclipse-temurin-17
 
 RUN apt-get update
 
@@ -21,8 +21,8 @@ ENTRYPOINT ["java","-jar","app.jar"]
 # docker run --name todo-backend -dp 5000:5000 todo-backend
 
 # docker hub
-# docker build -t ddrram/todo-backend:1.4.0 -f docker/todo-app/todo-backend.dockerfile .
-# docker push ddrram/todo-backend:1.4.0
+# docker build -t ddrram/todo-backend:3.0.0 -f docker/todo-app/todo-backend.dockerfile .
+# docker push ddrram/todo-backend:3.0.0
 
 # docker credentials store
 # docker --config .docker login https://index.docker.io/v1/
