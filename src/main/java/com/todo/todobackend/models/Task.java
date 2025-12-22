@@ -1,8 +1,7 @@
 package com.todo.todobackend.models;
 
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 
 @Entity
 @Builder
