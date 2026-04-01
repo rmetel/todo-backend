@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./mvnw dependency:tree)",
+      "WebSearch",
+      "WebFetch(domain:mvnrepository.com)",
+      "Bash(mvn dependency:tree)",
+      "Bash(java -version)"
+    ]
+  }
+}
