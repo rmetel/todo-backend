@@ -21,6 +21,7 @@ import java.io.IOException;
         "http://localhost:8080",
         "http://localhost:3000",
         "https://localhost:3000",
+        "http://localhost:5000",
         "https://localhost",
         "https://localhost:443",
         "http://212.227.201.99",
@@ -29,17 +30,18 @@ import java.io.IOException;
         "https://todotask.app/"
 })
 public class AppController {
-//    @Autowired
-//    private BuildProperties buildProperties;
+    @Autowired
+    private BuildProperties buildProperties;
 
-//    @Value("${git.branch}")
-//    private String branch;
+    @Value("${git.branch}")
+    private String branch;
+
+    @Value("${git.build.version}")
+    private String version;
 
     @GetMapping("/version")
     public App getBuildInformation() throws IOException {
         String metaFile = FileReader.getMetaFile();
-        String branch = "";
-        String version = "";
 
         if (!metaFile.isEmpty()) {
             branch = Parser.parseTag("branch", metaFile);
